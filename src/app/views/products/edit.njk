@@ -4,10 +4,10 @@
 
 <section class="container form">
 
-    <form action="/products?_method=PUT">
+    <form action="/products?_method=PUT" method="POST">
     
     <div class="header">
-        <h3>Editar Produto {{ productId }}</h3>
+        <h3>Editar Produto</h3>
     </div>
 
     <div class="fields">
@@ -18,14 +18,14 @@
         
     </div>
     
-    <button class="button" type="submit">Salvar</button>
+    <button class="button edit" type="submit">Atualizar</button>
     
     </form>
 
-    <form action="products?_method=DELETE" id="form-delete">
+    <form action="products?_method=DELETE" id="form-delete" method="POST">
 
         <input type="hidden" name="id" value="{{ product.id }}">
-        <button class="button" type="submit">Atualizar</button>
+        <button class="button delete" type="submit">Deletar</button>
 
     </form>
     
