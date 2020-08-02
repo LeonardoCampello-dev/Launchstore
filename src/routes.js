@@ -7,9 +7,12 @@ const routes = express.Router()
 routes.get("/", (req, res) => {
     return res.render("layout.njk")
 })
-
 routes.get("/products/create", ProductController.create)
+routes.get("/products/:id/edit", ProductController.edit)
+
+
 routes.post("/products", ProductController.post)
+
 
 // Alias
 
