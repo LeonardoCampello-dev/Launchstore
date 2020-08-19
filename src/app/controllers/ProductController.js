@@ -1,4 +1,4 @@
-const { formatPrice } = require('../../lib/utils')
+const { date, formatPrice } = require('../../lib/utils')
 
 const Category = require('../models/Category')
 const Product = require('../models/Product')
@@ -33,6 +33,24 @@ module.exports = {
         await Promise.all(filesPromises)
 
         return res.redirect(`products/${productId}/edit`)
+    },
+    async show(req, res) {
+        let results = await Product.find(req.params.id)
+        const product = results.rows[0]
+
+        if (!product) return res.send("Produto não encontrado!")
+        
+        const { minutes, hours, day, month } = date(product.updated_at)        
+
+        product.published = {
+            date: `${day}/${month}`,
+            time: `${hours}h${minutes}`
+        }
+
+        product.oldPrice = formatPrice(product.old_price)
+        product.price = formatPrice(product.price)
+
+        return res.render("products/show.njk", { product })
     },
     async edit(req, res) {
         let results = await Product.find(req.params.id)
@@ -75,14 +93,14 @@ module.exports = {
         }
 
         if (req.body.removed_files) {
-            const removedFiles = req.body.removed_files.split(",")
-            const lastIndex = removedFiles.lengt - 1
+            const removed_files = req.body.removed_files.split(",")
+            const lastIndex = removed_files.length - 1
 
-            removedFiles.splice(lastIndex, 1)
+            removed_files.splice(lastIndex, 1)
 
-            const removeFilesPromises = removedFiles.map(id => File.delete(id))
+            const removedFilesPromise = removed_files.map(id => File.delete(id))
 
-            await Promise.all(removeFilesPromises)
+            await Promise.all(removedFilesPromise)
         }
 
         req.body.price = req.body.price.replace(/\D/g, "")
@@ -95,7 +113,7 @@ module.exports = {
 
         await Product.update(req.body)
 
-        return res.redirect(`/products/${req.body.id}/edit`)
+        return res.redirect(`/products/${req.body.id}`)
     },
     async delete(req, res) {
         await Product.delete(req.body.id)
