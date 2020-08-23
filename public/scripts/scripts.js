@@ -1,3 +1,19 @@
+const Mask = {
+    apply(input, func) {
+        setTimeout(() => {
+            input.value = Mask[func](input.value)
+        }, 1)
+    },
+    formatBRL(value) {
+        value = value.replace(/\D/g, "")
+
+        return Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }).format(value / 100)
+    }
+}
+
 const PhotosUpload = {
     input: '',
     preview: document.querySelector('#photos-preview'),
@@ -7,12 +23,12 @@ const PhotosUpload = {
         const { files: fileList } = event.target
         PhotosUpload.input = event.target
 
-        if (PhotosUpload.hasLimit(event)) return 
-        
+        if (PhotosUpload.hasLimit(event)) return
+
         Array.from(fileList).forEach(file => {
-            
+
             PhotosUpload.files.push(file)
-            
+
             const reader = new FileReader()
 
             reader.onload = () => {
@@ -36,7 +52,7 @@ const PhotosUpload = {
             alert(`Envie no máximo ${uploadLimit} fotos 📷`)
 
             event.preventDefault()
-            return true 
+            return true
         }
 
         const photosDiv = []
@@ -52,9 +68,9 @@ const PhotosUpload = {
             alert(`Envie no máximo ${uploadLimit} fotos 📷`)
 
             event.preventDefault()
-            return true             
+            return true
         }
-        
+
         return false
     },
     getAllFiles() {
@@ -74,7 +90,7 @@ const PhotosUpload = {
 
         div.appendChild(PhotosUpload.getRemoveButton())
 
-        return div 
+        return div
     },
     getRemoveButton() {
         const button = document.createElement("i")
@@ -90,7 +106,7 @@ const PhotosUpload = {
 
         PhotosUpload.files.splice(index, 1)
         PhotosUpload.input.files = PhotosUpload.getAllFiles()
-        
+
         photoDiv.remove()
     },
     removeOldPhoto(event) {
@@ -103,7 +119,39 @@ const PhotosUpload = {
                 removedFiles.value += `${photoDiv.id},`
             }
         }
-        
+
         photoDiv.remove()
+    }
+}
+
+const ImageGallery = {
+    highlight: document.querySelector('.gallery .highlight > img'),
+    previews: document.querySelectorAll('.gallery-preview img'),
+    setImage(e) {
+        const image = e.target
+
+        ImageGallery.previews.forEach(preview => preview.classList.remove('active'))
+        image.classList.add('active')
+
+        ImageGallery.highlight.src = image.src
+        Lightbox.image.src = image.src
+    }
+}
+
+const Lightbox = {
+    target: document.querySelector('.lightbox-target'),
+    image: document.querySelector('.lightbox-target img'),
+    closeButton: document.querySelector('.lightbox-target a.lightbox-close'),
+    open() {
+        Lightbox.target.style.opacity = 1
+        Lightbox.target.style.top = 0
+        Lightbox.target.style.bottom = 0
+        Lightbox.closeButton.style.top = 0 
+    },
+    close() {
+        Lightbox.target.style.opacity = 0
+        Lightbox.target.style.top = "-100%"
+        Lightbox.target.style.bottom = "initial"
+        Lightbox.closeButton.style.top = "-80px"
     }
 }

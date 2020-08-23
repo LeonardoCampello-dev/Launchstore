@@ -39,8 +39,8 @@ module.exports = {
         const product = results.rows[0]
 
         if (!product) return res.send("Produto não encontrado!")
-        
-        const { minutes, hours, day, month } = date(product.updated_at)        
+
+        const { minutes, hours, day, month } = date(product.updated_at)
 
         product.published = {
             date: `${day}/${month}`,
@@ -50,7 +50,13 @@ module.exports = {
         product.oldPrice = formatPrice(product.old_price)
         product.price = formatPrice(product.price)
 
-        return res.render("products/show.njk", { product })
+        results = await Product.files(product.id)
+        const files = results.rows.map(file => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+        }))
+
+        return res.render("products/show.njk", { product, files })
     },
     async edit(req, res) {
         let results = await Product.find(req.params.id)

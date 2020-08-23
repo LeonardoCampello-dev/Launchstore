@@ -4,9 +4,9 @@ module.exports = {
         
         const minutes = date.getMinutes()
         const hours = date.getHours()
-        const day = `0${date.getUTCDate()}`.slice(-2)
-        const month = `0${date.getUTCMonth() + 1}`.slice(-2)
-        const year = date.getUTCFullYear()
+        const day = `0${date.getDate()}`.slice(-2)
+        const month = `0${date.getMonth() + 1}`.slice(-2)
+        const year = date.getFullYear()
 
         return {
             minutes,

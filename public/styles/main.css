@@ -58,12 +58,12 @@ footer {
 
     cursor: pointer;
 
-    transition: all 0.2s;
+    transition: all .2s;
 }
 
 .button:hover {
     background-color: #cc7817;
-    transition: 200ms;
+    transition: 0.2s;
 }
 
 .button.edit {
@@ -148,7 +148,7 @@ nav.primary ul li a i {
 
 nav.primary ul li a:hover {
     color: var(--primary-color);
-    transition: 200ms;
+    transition: .2s;
 }
 
 /* PRODUCTS FORM */
@@ -360,13 +360,102 @@ form .item #photos-preview img {
     border-radius: 4px;
 }
 
+/* PRODUCT GALLERY */
+
 .product-single .gallery {
     width: 100%;
 }
 
-.product-single .gallery img {
+.product-single .highlight > img {
     width: 100%;
+    height: 280px;
+
+    object-fit: none;
+    object-position: 50% 50%;
+
+    border: 1px solid #efefef;
+    border-radius: 8px 8px 0 0;
+
+    cursor: zoom-in;
 }
+
+.product-single .gallery-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.product-single .gallery-preview img {
+    width: 100%;
+    height: 100px;
+
+    object-fit: cover;
+
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+.product-single .gallery-preview img:hover,
+.product-single .gallery-preview img.active {
+    opacity: 1;
+}
+
+/* PRODUCT LIGHTBOX */
+
+.product-single .highlight .lightbox-target {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    overflow: hidden;
+    z-index: 100;
+
+    top: -100%;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+.product-single .highlight .lightbox-target img {
+    background-color: #fff;
+    box-shadow: 0px 0px 8px #333;
+    
+    width: 90%;
+    height: 90%;
+    
+    margin: auto;
+
+    position: absolute;
+
+    object-fit: contain;
+    
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.product-single .highlight a.lightbox-close {
+    color: #DD2F45;
+    background-color: #fff;
+    
+    position: absolute;
+    top: -80px;
+    right: 0;
+    
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 0 0 0 8px;
+
+    transition: .4s;
+}   
 
 /* PRODUCT VIEW INFO */
 
@@ -386,7 +475,7 @@ form .item #photos-preview img {
     font-size: 12px;
     line-height: 22px;
     color: #888;
-    letter-spacing: 0.4px;
+    letter-spacing: .4px;
 }
 
 /* PRICE BUY */
