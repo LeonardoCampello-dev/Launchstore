@@ -5,11 +5,11 @@ const Mask = {
         }, 1)
     },
     formatBRL(value) {
-        value = value.replace(/\D/g, "")
+        value = value.replace(/\D/g, '')
 
-        return Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL"
+        return Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
         }).format(value / 100)
     }
 }
@@ -57,7 +57,7 @@ const PhotosUpload = {
 
         const photosDiv = []
         preview.childNodes.forEach(item => {
-            if (item.classList && item.classList.value == "photo") {
+            if (item.classList && item.classList.value == 'photo') {
                 photosDiv.push(item)
             }
         })
@@ -74,7 +74,7 @@ const PhotosUpload = {
         return false
     },
     getAllFiles() {
-        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer
+        const dataTransfer = new ClipboardEvent('').clipboardData || new DataTransfer
 
         PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
 
@@ -93,14 +93,14 @@ const PhotosUpload = {
         return div
     },
     getRemoveButton() {
-        const button = document.createElement("i")
-        button.classList.add("material-icons")
-        button.innerHTML = "close"
+        const button = document.createElement('i')
+        button.classList.add('material-icons')
+        button.innerHTML = 'close'
 
         return button
     },
     removePhoto(event) {
-        const photoDiv = event.target.parentNode // <div class="photo"></div>
+        const photoDiv = event.target.parentNode // <div class='photo'></div>
         const photosArray = Array.from(PhotosUpload.preview.children)
         const index = photosArray.indexOf(photoDiv)
 
@@ -146,12 +146,12 @@ const Lightbox = {
         Lightbox.target.style.opacity = 1
         Lightbox.target.style.top = 0
         Lightbox.target.style.bottom = 0
-        Lightbox.closeButton.style.top = 0 
+        Lightbox.closeButton.style.top = 0
     },
     close() {
         Lightbox.target.style.opacity = 0
-        Lightbox.target.style.top = "-100%"
-        Lightbox.target.style.bottom = "initial"
-        Lightbox.closeButton.style.top = "-80px"
+        Lightbox.target.style.top = '-100%'
+        Lightbox.target.style.bottom = 'initial'
+        Lightbox.closeButton.style.top = '-80px'
     }
 }
