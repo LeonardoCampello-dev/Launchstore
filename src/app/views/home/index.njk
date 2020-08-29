@@ -2,10 +2,11 @@
 
 {% block content %}
 
-<h2>Últimos produtos</h2>
 
 <section class="container shop">
 
+    <h2>Últimos produtos</h2>
+    
     <div class="items">
 
     {% for product in products %}
@@ -13,8 +14,14 @@
         <div class="product">
             <div 
                 class="image"
-                style="background: url({{ product.img if product.img else '//placehold.it/500x500?text=Produto sem foto' }})"
-            >
+                style="background-image: url({{ product.img if product.img else '/assets/not-found.svg' }})"
+            ></div>
+
+            {% if product.oldPrice != product.price %}
+
+            <div class="old-price">{{ product.oldPrice }}</div>
+
+            {% endif %}
 
             <p>{{ product.price }}</p>
 
@@ -22,7 +29,6 @@
 
             <a href="/products/{{ product.id }}" class="button">Ver produto</a>
 
-            </div>
         </div>
 
     {% endfor %}
