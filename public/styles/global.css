@@ -3,6 +3,8 @@
 :root {
     --primary-color: #fd951f;
     --secondary-color: #00B1EA;
+    --text-base: #333;
+    --bg-color: #efefef;
 }
 
 * {

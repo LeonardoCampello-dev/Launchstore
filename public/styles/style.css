@@ -9,11 +9,16 @@ header, footer {
     text-align: center;
 }
 
+header {
+    margin-bottom: 48px;
+}
+
 header div.container {
     display: grid;
     grid-template-columns: 220px auto 280px;
     align-items: center;
     grid-gap: 24px;
+
 }
 
 header div.container a {
@@ -76,7 +81,7 @@ section.form {
     margin: 32px auto;
 
     box-shadow: 2px 2px 2px -4px rgba(60, 60, 60, 0.9);
-    border: 1px solid #efefef;
+    border: 1px solid var(--bg-color);
     border-radius: 4px;
 
     max-width: 700px;
@@ -123,7 +128,7 @@ form .item select {
 
     outline: none;
     box-shadow: 2px 2px 2px -4px rgba(60, 60, 60, 0.9);
-    border: 1px solid #efefef;
+    border: 1px solid var(--bg-color);
     border-radius: 4px;
 
     font-size: 16px;
@@ -178,7 +183,7 @@ form .item #photos-upload p {
 
     color: #fff;
     background-color: var(--secondary-color);
-    box-shadow: 0 2px 2px -6 #333;
+    box-shadow: 0 2px 2px -6 var(--text-base);
     border-radius: 4px;
 
     font-size: 12px;
@@ -272,7 +277,7 @@ form .item #photos-preview img {
 
     box-shadow: 2px 2px 2px -4px rgba(60, 60, 60, 0.9);
 
-    border: 1px solid #efefef;
+    border: 1px solid var(--bg-color);
     border-radius: 4px;
 }
 
@@ -289,7 +294,7 @@ form .item #photos-preview img {
     object-fit: none;
     object-position: 50% 50%;
 
-    border: 1px solid #efefef;
+    border: 1px solid var(--bg-color);
     border-radius: 8px 8px 0 0;
 
     cursor: zoom-in;
@@ -336,7 +341,7 @@ form .item #photos-preview img {
 
 .product-single .highlight .lightbox-target img {
     background-color: #fff;
-    box-shadow: 0px 0px 8px #333;
+    box-shadow: 0px 0px 8px var(--text-base);
     
     width: 90%;
     height: 90%;
@@ -383,7 +388,7 @@ form .item #photos-preview img {
 .product-single .info h1 {
     font-size: 32px;
     line-height: 42px;
-    color: #333;
+    color: var(--text-base);
     text-transform: uppercase;
 }
 
@@ -402,12 +407,12 @@ form .item #photos-preview img {
     justify-content: space-between;
 
     padding-top: 8px;
-    border-top: 1px solid #efefef;
+    border-top: 1px solid var(--bg-color);
 }
 
 .product-single .price-buy .price {
     font-size: 24px;
-    color: #333;
+    color: var(--text-base);
     font-weight: bold;
 
     display: flex;
@@ -440,7 +445,7 @@ form .item #photos-preview img {
 /* SHOP */
 
 .shop h2 {
-    margin: 48px;
+    margin-bottom: 48px;
 }
 
 .shop .items {    
@@ -500,5 +505,56 @@ form .item #photos-preview img {
 
 .shop .button:hover {
     transform: scale(.9);
+}
+
+/* SEARCH PAGE */
+
+.search-products {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+
+    margin-top: 48px;
+}
+
+.search-products .header {
+    color: var(--text-base);
+    font-size: 14px;
+
+    margin-bottom: 48px;
+}
+
+.search-products .header h2 {
+    font-size: 32px;
+    text-transform: capitalize;
+
+    margin-bottom: 8px;
+}
+
+.search-products nav h4 {
+    color: var(--text-base);
+    font-size: 14px;
+    text-transform: uppercase;
+
+    margin-bottom: 16px;
+}
+
+.search-products nav ul li {
+    background-color: var(--primary-color);
+    border-radius: 16px;
+    padding: 8px;
+
+    display: inline-block;
+    
+    margin: 4px 0;
+
+    transition: .2s;
+}
+    
+.search-products nav ul li a {
+    color: #fff;
+}
+
+.search-products nav ul li:hover {
+    background-color: #cc7817;
 }
 
