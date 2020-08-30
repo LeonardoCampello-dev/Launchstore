@@ -1,3 +1,5 @@
+const Intl = require('intl')
+
 module.exports = {
     date(timestamp) {
         const date = new Date(timestamp)
@@ -20,9 +22,9 @@ module.exports = {
         }
     },
     formatPrice(price) {
-            return Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL"
+            return Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
         }).format(price/100)
     }
 }

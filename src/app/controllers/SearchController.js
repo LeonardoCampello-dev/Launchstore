@@ -49,12 +49,12 @@ module.exports = {
             }))
                 .reduce((categoriesFiltered, category) => {
 
-                    const found = categoriesFiltered.some(cat => cat.id == category.id);
+                    const found = categoriesFiltered.some(cat => cat.id == category.id)
 
                     if (!found) categoriesFiltered.push(category)
 
                     return categoriesFiltered
-                }, []);
+                }, [])
 
             return res.render('search/index.njk', { products, search, categories })
         } catch (error) {
