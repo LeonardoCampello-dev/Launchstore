@@ -40,9 +40,15 @@ The following technologies were used
 
 ![home](./.github/home.png)
 
+**Product**
+
 ![product](./.github/product.png)
 
+**Search/Categories**
+
 ![categories](./.github/categories.png)
+
+**GIF**
 
 ![Launchstore](./.github/Launchstore.gif)
 
