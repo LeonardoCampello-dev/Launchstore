@@ -1,0 +1,66 @@
+/* SHOP */
+
+.shop h2 {
+    letter-spacing: .3px;
+    
+    margin-bottom: 48px;
+}
+
+.shop .items {    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    grid-gap: 24px;
+}
+
+.shop .product {
+    background-color: #fff;
+    border-radius: 4px;
+
+    padding: 16px;
+
+    display: grid;
+}
+
+.shop .product .image {
+    padding-top: 56.25%;
+    height: 220px;
+    
+    border-radius: 4px;
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.shop .product h4 {
+    margin: 8px 0;
+    font-weight: 300;
+    color: #999;
+}
+
+.shop .product p {
+    color: #101010;
+    font-weight: 300;
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+.shop .product .old-price {
+    padding: 0;
+    margin: 4px 0;
+
+    font-size: 14px;
+    color: #999;
+
+    text-decoration: line-through;
+}
+
+.shop .button {
+    background-color: var(--secondary-color);
+    transition: .2s;
+}
+
+.shop .button:hover {
+    transform: scale(.9);
+}

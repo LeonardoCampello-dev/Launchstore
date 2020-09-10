@@ -1,0 +1,50 @@
+/* SEARCH PAGE */
+
+.search-products {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+
+    margin-top: 48px;
+}
+
+.search-products .header {
+    color: var(--text-base);
+    font-size: 14px;
+
+    margin-bottom: 48px;
+}
+
+.search-products .header h2 {
+    font-size: 32px;
+    text-transform: capitalize;
+
+    margin-bottom: 8px;
+}
+
+.search-products nav h4 {
+    color: var(--text-base);
+    font-size: 14px;
+    text-transform: uppercase;
+
+    margin-bottom: 16px;
+}
+
+.search-products nav ul li {
+    background-color: var(--primary-color);
+    border-radius: 16px;
+    padding: 8px;
+
+    display: inline-block;
+    
+    margin: 4px 0;
+
+    transition: .2s;
+}
+    
+.search-products nav ul li a {
+    color: #fff;
+}
+
+.search-products nav ul li:hover {
+    background-color: #cc7817;
+}
