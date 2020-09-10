@@ -1,3 +1,4 @@
+
 const Mask = {
     apply(input, func) {
         setTimeout(() => {
@@ -11,6 +12,39 @@ const Mask = {
             style: 'currency',
             currency: 'BRL'
         }).format(value / 100)
+    },
+    cpfCnpj(value) {
+        value = value.replace(/\D/g, '')
+
+        if (value.length > 14)
+            value = value.slice(0, -1)
+
+        if (value.length > 11) {
+            // CNPJ 12.123.123/0001-12
+
+            value = value.replace(/(\d{2})(\d)/, '$1.$2')
+            value = value.replace(/(\d{3})(\d)/, '$1.$2')
+            value = value.replace(/(\d{3})(\d)/, '$1/$2')
+            value = value.replace(/(\d{4})(\d)/, '$1-$2')
+        } else {
+            // CPF 123.456.789-10
+
+            value = value.replace(/(\d{3})(\d)/, '$1.$2')
+            value = value.replace(/(\d{3})(\d)/, '$1.$2')
+            value = value.replace(/(\d{3})(\d)/, '$1-$2')
+        }
+
+        return value
+    },
+    cep(value) {
+        value = value.replace(/\D/g, '')
+
+        if (value.length > 8)
+            value = value.slice(0, -1)
+
+        value = value.replace(/(\d{5})(\d)/, '$1-$2')
+
+        return value
     }
 }
 
@@ -153,5 +187,28 @@ const Lightbox = {
         Lightbox.target.style.top = '-100%'
         Lightbox.target.style.bottom = 'initial'
         Lightbox.closeButton.style.top = '-80px'
+    }
+}
+
+const Validate = {
+    apply(input, func) {
+        let results = Validate[func](input.value)
+        input.value = results.value
+
+        if (results.error)
+            alert(results.error)
+    },
+    isEmail(value) {
+        let error = null
+
+        const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+        if (!value.match(mailFormat))
+            error = 'Email inválido'
+
+        return {
+            error,
+            value
+        }
     }
 }

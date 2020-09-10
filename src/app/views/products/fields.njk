@@ -6,7 +6,10 @@
 
             {% for category in categories %}
             
-            <option value="{{ category.id }}" {% if product.category_id == category.id %} selected {% endif %}>
+            <option value="{{ category.id }}" 
+                {% if product.category_id == category.id %} 
+                    selected 
+                {% endif %}>
                 {{ category.name }}
             </option>
             
@@ -20,7 +23,12 @@
     <div>Nome</div>
 
     <div>
-        <input type="text" name="name" value="{{ product.name }}" placeholder="Digite o título do anúncio"> 
+        <input 
+            type="text" 
+            name="name" 
+            value="{{ product.name }}" 
+            placeholder="Digite o título do anúncio"
+        > 
     </div>
 </div>
 
@@ -67,11 +75,21 @@
     <div>Valor</div>
 
     <div>
-        <input type="text" name="price" placeholder="Valor do produto" value="{{ product.price }}" onkeydown="Mask.apply(this, 'formatBRL')">
+        <input 
+            type="text" 
+            name="price" 
+            placeholder="Valor do produto" 
+            value="{{ product.price }}" 
+            onkeydown="Mask.apply(this, 'formatBRL')"
+        >
     </div>
 
     {% if product.old_price %}
-    <input type="hidden" name="old_price" value="{{ product.old_price }}">
+    <input 
+        type="hidden" 
+        name="old_price" 
+        value="{{ product.old_price }}"
+    >
     {% endif %}
 </div>
 
@@ -80,7 +98,11 @@
     <div>Quantidade</div>
 
     <div>
-        <input type="number" name="quantity" value="{{ product.quantity }}">
+        <input 
+            type="number" 
+            name="quantity" 
+            value="{{ product.quantity }}"
+        >
     </div>
 </div>
 
