@@ -65,6 +65,7 @@
             placeholder="Digite seu documento"
             value="{{ user.cpf_cnpj }}" 
             onkeydown="Mask.apply(this, 'cpfCnpj')"
+            onblur="Validate.apply(this, 'isCpfCnpj')"
         > 
     </div>
 </div>
@@ -80,6 +81,7 @@
             value="{{ user.cep }}" 
             placeholder="66666-666"
             onkeydown="Mask.apply(this, 'cep')"
+            onblur="Validate.apply(this, 'isCep')"
         > 
     </div>
 </div>

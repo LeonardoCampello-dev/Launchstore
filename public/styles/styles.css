@@ -493,14 +493,14 @@ form .item #photos-preview img {
     max-width: 500px;
 }
 
-.form input[name="email"],
-.form input[name="password"],
-.form input[name="passwordRepeat"],
-.form input[name="cpf_cnpj"] {
-    max-width: 60%;
-}
+/* VALIDATE ERROS */
 
-.form input[name="cep"] {
-    max-width: 25%;
-}
+.input .error {
+    background-color: #D1363A;
+    color: #fff;
 
+    padding: 4px;
+    border-radius: 4px;
+
+    text-align: center;
+}
