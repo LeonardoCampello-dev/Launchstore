@@ -33,6 +33,7 @@ The following technologies were used
 - [x] [node-postgres](https://www.npmjs.com/package/pg) 
 - [x] [nodemon](https://www.npmjs.com/package/nodemon) 
 - [x] [multer](https://www.npmjs.com/package/multer) 
+- [x] [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## 🎨 Layout
 
@@ -40,19 +41,34 @@ The following technologies were used
 
 ![home](./.github/home.png)
 
+**Search/Categories**
+
+![filter](./.github/filter.png)
+
 **Product**
 
 ![product](./.github/product.png)
 
-**Search/Categories**
-
-![categories](./.github/categories.png)
-
-**GIF**
-
-![Launchstore](./.github/Launchstore.gif)
-
 ---
+
+## Project installation 👷‍♂️
+
+First you need to have [Node.js](https://nodejs.org/en/) installed, then **run the following command:**
+
+``` bash 
+## To clone the project
+git clone https://github.com/LeonardoCampello-dev/Foodfy.git
+```
+
+``` bash 
+## To install the dependencies
+npm install
+```
+
+``` bash 
+## Running project
+npm start
+```
 
 ## 📜 License 
 
