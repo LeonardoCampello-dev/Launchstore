@@ -21,8 +21,7 @@ module.exports = {
 
         if (req.files.length == 0) res.send('Por favor, insira pelo menos uma imagem')
 
-        let results = await Product.create(req.body)
-        const productId = results.rows[0].id
+        let productId = await Product.create(req.body)
 
         const filesPromises = req.files.map(file => File.create({ ...file, product_id: productId }))
         await Promise.all(filesPromises)

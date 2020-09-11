@@ -6,43 +6,54 @@ module.exports = {
 
         return results.rows
     },
-    create(data) {
-        const query = `
-        INSERT INTO products (
-            category_id,
-            user_id,
-            name,
-            description,
-            old_price,
-            price,
-            quantity,
-            status
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        RETURNING id
-        `
+    async create(data) {
+        try {
+            const query = `
+            INSERT INTO products (
+                category_id,
+                user_id,
+                name,
+                description,
+                old_price,
+                price,
+                quantity,
+                status
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING id
+            `
 
-        data.price = data.price.replace(/\D/g, "")
+            data.price = data.price.replace(/\D/g, "")
 
-        const values = [
-            data.category_id,
-            data.user_id || 1,
-            data.name,
-            data.description,
-            data.old_price || data.price,
-            data.price,
-            data.quantity,
-            data.status || 1,
-        ]
+            const values = [
+                data.category_id,
+                data.user_id || 1,
+                data.name,
+                data.description,
+                data.old_price || data.price,
+                data.price,
+                data.quantity,
+                data.status || 1,
+            ]
 
-        return db.query(query, values)
+            const results = await db.query(query, values)
+            return results.rows[0].id
+        } catch (error) {
+            console.error(error)
+        }
+
     },
     async find(id) {
-        const results = await db.query(`SELECT * FROM products WHERE id = $1`, [id])
+        try {
+            const results = await db.query(`SELECT * FROM products WHERE id = $1`, [id])
 
-        return results.rows[0]
+            return results.rows[0]
+        } catch (error) {
+            console.error(error)
+        }
     },
     update(data) {
-        const query = `
+        try {
+            const query = `
             UPDATE products SET
                 category_id=($1),
                 user_id=($2), 
@@ -55,43 +66,55 @@ module.exports = {
             WHERE id = $9
         `
 
-        const values = [
-            data.category_id,
-            data.user_id,
-            data.name,
-            data.description,
-            data.old_price,
-            data.price,
-            data.quantity,
-            data.status,
-            data.id
-        ]
+            const values = [
+                data.category_id,
+                data.user_id,
+                data.name,
+                data.description,
+                data.old_price,
+                data.price,
+                data.quantity,
+                data.status,
+                data.id
+            ]
 
-        return db.query(query, values)
+            return db.query(query, values)
+        } catch (error) {
+            console.error(error)
+        }
     },
     delete(id) {
-        return db.query(`DELETE FROM products WHERE id = $1`, [id])
+        try {
+            return db.query(`DELETE FROM products WHERE id = $1`, [id])
+        } catch (error) {
+            console.error(error)
+        }
     },
     async files(id) {
-        const results = await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
+        try {
+            const results = await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
 
-        return results.rows
+            return results.rows
+        } catch (error) {
+            console.error(error)
+        }
     },
     search({ filter, category }) {
-        let query = '',
-            filterQuery = ''
+        try {
+            let query = '',
+                filterQuery = ''
 
-        if (category) {
-            filterQuery += `AND products.category_id = ${category}`
-        }
+            if (category) {
+                filterQuery += `AND products.category_id = ${category}`
+            }
 
-        if (filter) {
-            filterQuery += `
+            if (filter) {
+                filterQuery += `
                 AND (products.name ILIKE '%${filter}%' OR products.description ILIKE '%${filter}%')
             `
-        }
+            }
 
-        query = `
+            query = `
             SELECT products.*, categories.name AS category_name
             FROM products
             LEFT JOIN categories ON (categories.id = products.category_id)
@@ -99,7 +122,10 @@ module.exports = {
             ${filterQuery}
         `
 
-        return db.query(query)
+            return db.query(query)
+        } catch (error) {
+            console.error(error)
+        }
     }
 }
 
