@@ -5,15 +5,10 @@ const Product = require('../models/Product')
 const File = require('../models/File')
 
 module.exports = {
-    create(req, res) {
-        Category.all()
-            .then(results => {
-                const categories = results.rows
+    async create(req, res) {
+        const categories = await Category.all()
 
-                return res.render('products/create.njk', { categories })
-            }).catch(err => {
-                throw new Error(err)
-            })
+        return res.render('products/create.njk', { categories })
     },
     async post(req, res) {
         const keys = Object.keys(req.body)
@@ -35,8 +30,7 @@ module.exports = {
         return res.redirect(`products/${productId}/edit`)
     },
     async show(req, res) {
-        let results = await Product.find(req.params.id)
-        const product = results.rows[0]
+        let product = await Product.find(req.params.id)
 
         if (!product) return res.send('Produto não encontrado!')
 
@@ -50,8 +44,8 @@ module.exports = {
         product.oldPrice = formatPrice(product.old_price)
         product.price = formatPrice(product.price)
 
-        results = await Product.files(product.id)
-        const files = results.rows.map(file => ({
+        let files = await Product.files(product.id)
+        files = files.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
         }))
@@ -59,22 +53,16 @@ module.exports = {
         return res.render('products/show.njk', { product, files })
     },
     async edit(req, res) {
-        let results = await Product.find(req.params.id)
-        const product = results.rows[0]
+        let product = await Product.find(req.params.id)
 
         if (!product) return res.send('Produto não encontrado!')
 
         product.old_price = formatPrice(product.old_price)
         product.price = formatPrice(product.price)
 
-        // get categories 
-        results = await Category.all()
-        const categories = results.rows
+        const categories = await Category.all()
 
-        //get files 
-        results = await Product.files(product.id)
-        let files = results.rows
-
+        let files = await Product.files(product.id)
         files = files.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`

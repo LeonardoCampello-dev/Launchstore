@@ -1,8 +1,10 @@
 const db = require('../../config/db')
 
 module.exports = {
-    all() {
-        return db.query(`SELECT * FROM products ORDER BY updated_at DESC`)
+    async all() {
+        const results = await db.query(`SELECT * FROM products ORDER BY updated_at DESC`)
+
+        return results.rows
     },
     create(data) {
         const query = `
@@ -34,8 +36,10 @@ module.exports = {
 
         return db.query(query, values)
     },
-    find(id) {
-        return db.query(`SELECT * FROM products WHERE id = $1`, [id])
+    async find(id) {
+        const results = await db.query(`SELECT * FROM products WHERE id = $1`, [id])
+
+        return results.rows[0]
     },
     update(data) {
         const query = `
@@ -68,8 +72,10 @@ module.exports = {
     delete(id) {
         return db.query(`DELETE FROM products WHERE id = $1`, [id])
     },
-    files(id) {
-        return db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
+    async files(id) {
+        const results = await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
+
+        return results.rows
     },
     search({ filter, category }) {
         let query = '',
