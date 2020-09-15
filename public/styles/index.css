@@ -4,6 +4,7 @@
     --text-base: #333;
     --bg-color: #efefef;
     --error-color: #D1363A;
+    --success-color: #00a000;
 }
 
 * {

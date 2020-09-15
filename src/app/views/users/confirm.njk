@@ -1,0 +1,13 @@
+<script>
+
+    const formDelete = document.querySelector("#form-delete")
+
+    formDelete.addEventListener("submit", (event) => {
+        const confirmation = confirm("Você deseja realmente deletar sua conta? Essa ação é irreversível 😱")
+
+        if(!confirmation) {
+            event.preventDefault()
+        }
+    })
+    
+</script>
