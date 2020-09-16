@@ -1,0 +1,28 @@
+section.login.container {
+    max-width: 450px;
+}
+
+section.login.container .fields {
+    margin-bottom: 32px;
+}
+
+section.login.container button {
+    margin-bottom: 24px;
+}
+
+section.login.container .footer ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+section.login.container .footer ul li a {
+    color: #777;
+    transition: .1s;
+}
+
+section.login.container .footer ul li a:hover {
+    color: #101010;
+    font-weight: bold;
+}
