@@ -26,29 +26,7 @@
                         Minha conta
                     </a>
 
-                    {% if user %}
-                    <ul class="submenu">
-
-                        <li>
-                            <a href="/users">Configurações</a>
-                        </li>
-
-                        <li>
-                            <a href="/buying">Meus pedidos</a>
-                        </li>
-
-                        <li>
-                            <a href="/selling">Minhas vendas</a>
-                        </li>
-
-                        <li>
-                            <form action="/users/logout" method="POST">
-                                <button>Sair</button>
-                            </form>
-                        </li>
-
-                    </ul>
-                    {% endif %}
+                    {% include './submenu.njk' %}
 
                 </li>
             </ul>
