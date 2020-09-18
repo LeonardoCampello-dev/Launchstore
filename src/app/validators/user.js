@@ -18,7 +18,7 @@ module.exports = {
     async post(req, res, next) {
         const fillAllFields = checkAllFields(req.body)
 
-        if (fillAllFields) return res.render('users/register', fillAllFields)
+        if (fillAllFields) return res.render('users/register.njk', fillAllFields)
 
         let { email, cpf_cnpj, password, passwordRepeat } = req.body
 
@@ -29,12 +29,12 @@ module.exports = {
             or: { cpf_cnpj }
         })
 
-        if (user) return res.render('users/register', {
+        if (user) return res.render('users/register.njk', {
             user: req.body,
             error: 'Usuário já cadastrado!'
         })
 
-        if (password !== passwordRepeat) return res.render('users/register', {
+        if (password !== passwordRepeat) return res.render('users/register.njk', {
             user: req.body,
             error: 'Senhas não correspondentes!'
         })
@@ -48,7 +48,7 @@ module.exports = {
             where: { id }
         })
 
-        if (!user) return res.render('users/register', {
+        if (!user) return res.render('users/register.njk', {
             error: 'Usuário não encontrado!'
         })
 
@@ -59,11 +59,11 @@ module.exports = {
     async put(req, res, next) {
         const fillAllFields = checkAllFields(req.body)
 
-        if (fillAllFields) return res.render('users/index', fillAllFields)
+        if (fillAllFields) return res.render('users/index.njk', fillAllFields)
 
         const { id, password } = req.body
 
-        if (!password) return res.render('users/index', {
+        if (!password) return res.render('users/index.njk', {
             user: req.body,
             error: 'Digite sua senha para atualizar o cadastro!'
         })
@@ -74,7 +74,7 @@ module.exports = {
 
         const passed = await compare(password, user.password)
 
-        if (!passed) return res.render('users/index', {
+        if (!passed) return res.render('users/index.njk', {
             user: req.body,
             error: 'Senha incorreta'
         })
