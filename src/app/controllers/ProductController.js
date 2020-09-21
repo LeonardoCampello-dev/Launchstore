@@ -11,22 +11,31 @@ module.exports = {
         return res.render('products/create.njk', { categories })
     },
     async post(req, res) {
-        const keys = Object.keys(req.body)
+        try {
+            const keys = Object.keys(req.body)
 
-        for (key of keys) {
-            if (req.body[key] == ' && key != removed_files') {
-                return res.send('Por favor, preencha todos os campos!')
+            for (key of keys) {
+                if (req.body[key] == ' && key != removed_files') {
+                    return res.send('Por favor, preencha todos os campos!')
+                }
             }
+
+            if (req.files.length == 0) res.send('Por favor, insira pelo menos uma imagem')
+
+            req.body.user_id = req.session.userId
+            let productId = await Product.create(req.body)
+
+            const filesPromises = req.files.map(file => File.create({ ...file, product_id: productId }))
+            await Promise.all(filesPromises)
+
+            return res.redirect(`products/${productId}/edit`)
+        } catch (error) {
+            console.error(error)
+            return res.render('products/create.njk', {
+                product: req.body,
+                error: 'Erro na criação do produto!'
+            })
         }
-
-        if (req.files.length == 0) res.send('Por favor, insira pelo menos uma imagem')
-
-        let productId = await Product.create(req.body)
-
-        const filesPromises = req.files.map(file => File.create({ ...file, product_id: productId }))
-        await Promise.all(filesPromises)
-
-        return res.redirect(`products/${productId}/edit`)
     },
     async show(req, res) {
         let product = await Product.find(req.params.id)
@@ -43,8 +52,8 @@ module.exports = {
         product.oldPrice = formatPrice(product.old_price)
         product.price = formatPrice(product.price)
 
-        let files = await Product.files(product.id)
-        files = files.map(file => ({
+        let results = await Product.files(product.id)
+        files = results.rows.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
         }))
@@ -61,8 +70,8 @@ module.exports = {
 
         const categories = await Category.all()
 
-        let files = await Product.files(product.id)
-        files = files.map(file => ({
+        let results = await Product.files(product.id)
+        files = results.rows.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
         }))
@@ -106,7 +115,7 @@ module.exports = {
 
         await Product.update(req.body)
 
-        return res.redirect(`/products/${req.body.id}`)
+        return res.redirect(`/products/${req.session.userId}`)
     },
     async delete(req, res) {
         await Product.delete(req.body.id)

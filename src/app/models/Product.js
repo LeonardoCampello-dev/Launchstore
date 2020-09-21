@@ -56,19 +56,17 @@ module.exports = {
             const query = `
             UPDATE products SET
                 category_id=($1),
-                user_id=($2), 
-                name=($3), 
-                description=($4), 
-                old_price=($5), 
-                price=($6), 
-                quantity=($7), 
-                status=($8)
-            WHERE id = $9
+                name=($2), 
+                description=($3), 
+                old_price=($4), 
+                price=($5), 
+                quantity=($6), 
+                status=($7)
+            WHERE id = $8
         `
 
             const values = [
                 data.category_id,
-                data.user_id,
                 data.name,
                 data.description,
                 data.old_price,
@@ -90,11 +88,9 @@ module.exports = {
             console.error(error)
         }
     },
-    async files(id) {
+    files(id) {
         try {
-            const results = await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
-
-            return results.rows
+            return db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
         } catch (error) {
             console.error(error)
         }

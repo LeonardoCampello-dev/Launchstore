@@ -6,11 +6,18 @@ module.exports = {
         return res.render('users/register.njk')
     },
     async post(req, res) {
-        const userId = await User.create(req.body)
+        try {
+            const userId = await User.create(req.body)
 
-        req.session.userId = userId
+            req.session.userId = userId
 
-        return res.redirect('/users')
+            return res.redirect('/users')
+        } catch (error) {
+            console.error(error)
+            return res.render('users/register.njk', {
+                error: 'Erro na criação de conta!'
+            })
+        }
     },
     async show(req, res) {
         const { user } = req
@@ -44,6 +51,22 @@ module.exports = {
             console.error(error)
             return res.render('users/index.njk', {
                 error: 'Algo de errado aconteceu 😟'
+            })
+        }
+    },
+    async delete(req, res) {
+        try {
+            await User.delete(req.body.id)
+            req.session.destroy()
+
+            return res.render('session/login.njk', {
+                success: 'Conta deletada com sucesso! ✅'
+            })
+        } catch (error) {
+            console.error(error)
+            return res.render('users/index.njk', {
+                user: req.body,
+                error: 'Erro ao tentar deletar conta!'
             })
         }
     }

@@ -67,9 +67,10 @@ module.exports = {
         return res.render('session/reset-password.njk', { token: req.query.token })
     },
     async reset(req, res) {
+        const { password, token } = req.body
+
         try {
             const user = req.user
-            const { password, token } = req.body
 
             const newPassword = await hash(password, 8)
 
