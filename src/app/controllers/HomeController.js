@@ -4,28 +4,36 @@ const Product = require('../models/Product')
 
 module.exports = {
     async index(req, res) {
-        let products = await Product.all()
+        try {
+            let products = await Product.all()
 
-        if (!products) return res.send('Produtos não encontrados.')
+            if (!products) return res.send('Produtos não encontrados.')
 
-        async function getImage(productId) {
-            let results = await Product.files(productId)
-            files = results.rows.map(file =>
-                `${req.protocol}://${req.headers.host}${file.path.replace('public\\images\\', '\\\\images\\\\')}`)
+            async function getImage(productId) {
+                let results = await Product.files(productId)
+                files = results.rows.map(file =>
+                    `${req.protocol}://${req.headers.host}${file.path.replace('public\\images\\', '\\\\images\\\\')}`)
 
-            return files[0]
+                return files[0]
+            }
+
+            const productsPromises = products.map(async product => {
+                product.img = await getImage(product.id)
+                product.oldPrice = formatPrice(product.old_price)
+                product.price = formatPrice(product.price)
+
+                return product
+            }).filter((product, index) => index > 2 ? false : true)
+
+            const lastAdded = await Promise.all(productsPromises)
+
+            return res.render('home/index.njk', { products: lastAdded })
+        } catch (error) {
+            console.error(error)
+            return res.render('home/index.njk', {
+                products: lastAdded,
+                error: 'Erro ao carregar a página!'
+            })
         }
-
-        const productsPromises = products.map(async product => {
-            product.img = await getImage(product.id)
-            product.oldPrice = formatPrice(product.old_price)
-            product.price = formatPrice(product.price)
-
-            return product
-        }).filter((product, index) => index > 2 ? false : true)
-
-        const lastAdded = await Promise.all(productsPromises)
-
-        return res.render('home/index.njk', { products: lastAdded })
     }
 }

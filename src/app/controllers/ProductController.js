@@ -79,43 +79,50 @@ module.exports = {
         return res.render('products/edit.njk', { product, categories, files })
     },
     async put(req, res) {
-        const keys = Object.keys(req.body)
+        try {
+            const keys = Object.keys(req.body)
 
-        for (key of keys) {
-            if (req.body[key] == ' && key != removed_files') {
-                return res.send('Por favor, preencha todos os campos!')
+            for (key of keys) {
+                if (req.body[key] == ' && key != removed_files') {
+                    return res.send('Por favor, preencha todos os campos!')
+                }
             }
+
+            if (req.files.length != 0) {
+                const newFilesPromises = req.files.map(file =>
+                    File.create({ ...file, product_id: req.body.id }))
+
+                await Promise.all(newFilesPromises)
+            }
+
+            if (req.body.removed_files) {
+                const removed_files = req.body.removed_files.split(',')
+                const lastIndex = removed_files.length - 1
+
+                removed_files.splice(lastIndex, 1)
+
+                const removedFilesPromise = removed_files.map(id => File.delete(id))
+
+                await Promise.all(removedFilesPromise)
+            }
+
+            req.body.price = req.body.price.replace(/\D/g, '')
+
+            if (req.body.old_price != req.body.price) {
+                const oldProduct = await Product.find(req.body.id)
+
+                req.body.old_price = oldProduct.price
+            }
+
+            await Product.update(req.body)
+
+            return res.redirect(`/products/${req.body.id}`)
+        } catch (error) {
+            return res.render(`/products/${req.body.id}`, {
+                product: req.body,
+                error: 'Erro ao atualizar o produto!'
+            })
         }
-
-        if (req.files.length != 0) {
-            const newFilesPromises = req.files.map(file =>
-                File.create({ ...file, product_id: req.body.id }))
-
-            await Promise.all(newFilesPromises)
-        }
-
-        if (req.body.removed_files) {
-            const removed_files = req.body.removed_files.split(',')
-            const lastIndex = removed_files.length - 1
-
-            removed_files.splice(lastIndex, 1)
-
-            const removedFilesPromise = removed_files.map(id => File.delete(id))
-
-            await Promise.all(removedFilesPromise)
-        }
-
-        req.body.price = req.body.price.replace(/\D/g, '')
-
-        if (req.body.old_price != req.body.price) {
-            const oldProduct = await Product.find(req.body.id)
-
-            req.body.old_price = oldProduct.price
-        }
-
-        await Product.update(req.body)
-
-        return res.redirect(`/products/${req.session.userId}`)
     },
     async delete(req, res) {
         await Product.delete(req.body.id)
