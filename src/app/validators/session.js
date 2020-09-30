@@ -1,6 +1,5 @@
 const User = require('../models/User')
 const { compare } = require('bcryptjs')
-const { reset } = require('browser-sync')
 
 module.exports = {
     async login(req, res, next) {

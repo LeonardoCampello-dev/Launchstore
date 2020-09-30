@@ -27,7 +27,7 @@ module.exports = {
 
             const token = crypto.randomBytes(20).toString('hex')
 
-            // token expiration
+            // token expires
             let now = new Date()
             now = now.setHours(now.getHours() + 1)
 
@@ -39,9 +39,9 @@ module.exports = {
             await mailer.sendMail({
                 from: 'no-reply@launchstore.com.br',
                 to: user.email,
-                subject: 'Recuperação de senha',
+                subject: 'Recuperação de senha 🗝',
                 html: `
-                <h2>Esqueceu sua senha?</h2>
+                <h2>Esqueceu sua senha? 😟</h2>
     
                 <p>Não se preocupe, clique no link abaixo para recuperá-la</p>
     
@@ -82,7 +82,7 @@ module.exports = {
 
             return res.render('session/login.njk', {
                 user: req.body,
-                success: 'Senha atualizada com sucesso! Faça seu login'
+                success: 'Senha atualizada com sucesso! Faça seu login.'
             })
         } catch (error) {
             console.error(error)

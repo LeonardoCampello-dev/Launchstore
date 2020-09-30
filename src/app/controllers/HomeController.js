@@ -1,17 +1,19 @@
-const { formatPrice } = require('../../lib/utils')
-
 const Product = require('../models/Product')
+
+const { formatPrice } = require('../../lib/utils')
 
 module.exports = {
     async index(req, res) {
         try {
-            let products = await Product.all()
+            const products = await Product.findAll()
 
-            if (!products) return res.send('Produtos não encontrados.')
+            if (!products) return res.render('home/index.njk', {
+                error: 'Produtos não encontrados!'
+            })
 
             async function getImage(productId) {
-                let results = await Product.files(productId)
-                files = results.rows.map(file =>
+                let files = await Product.files(productId)
+                files = files.map(file =>
                     `${req.protocol}://${req.headers.host}${file.path.replace('public\\images\\', '\\\\images\\\\')}`)
 
                 return files[0]
