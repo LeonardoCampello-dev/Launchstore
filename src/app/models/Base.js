@@ -1,5 +1,19 @@
 const db = require("../../config/db")
 
+function find(filters, table) {
+    let query = `SELECT * FROM ${table}`
+
+    Object.keys(filters).map(key => {
+        query += `${key}`
+
+        Object.keys(filters[key]).map(field => {
+            query += `${field} = '${filters[key][field]}'`
+        })
+    })
+
+    return db.query(query)
+}
+
 const Base = {
     init({ table }) {
         if (!table) throw new Error('Invalid params!')
@@ -8,24 +22,29 @@ const Base = {
 
         return this
     },
-    async findOne(filters) {
+    async find(id) {
         try {
-            let query = `SELECT * FROM ${this.table}`
-
-            Object.keys(filters).map(key => {
-                // WHERE | OR
-                query = `${query}
-                ${key}
-                `
-
-                Object.keys(filters[key]).map(field => {
-                    query = `${query} ${field} = '${filters[key][field]}'`
-                })
-            })
-
-            const results = await db.query(query)
+            const results = find({ where: { id } }, this.table)
 
             return results.rows[0]
+        } catch (error) {
+            console.error(error)
+        }
+    },
+    async findOne(filters) {
+        try {
+            const results = find(filters, this.table)
+
+            return results.rows[0]
+        } catch (error) {
+            console.error(error)
+        }
+    },
+    async findAll(filters) {
+        try {
+            const results = find(filters, this.table)
+
+            return results.rows
         } catch (error) {
             console.error(error)
         }
@@ -41,7 +60,7 @@ const Base = {
             })
 
             const query = `INSERT INTO ${this.table} (${keys.join(',')})
-            VALUES ${values.join(',')}
+            VALUES (${values.join(',')})
             RETURNING id
         `
 
