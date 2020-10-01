@@ -2,14 +2,20 @@ const faker = require('faker')
 const { hash } = require('bcryptjs')
 
 const User = require('./src/app/models/User')
+const Product = require('./src/app/models/Product')
+const File = require('./src/app/models/File')
 
 let usersIds = []
+let productsIds = []
+
+const totalUsers = 3
+const totalProducts = 10
 
 async function createUsers() {
     const users = []
     const password = await hash('@launchstore', 8)
 
-    while (users.length < 5) {
+    while (users.length < totalUsers) {
         users.push({
             name: faker.name.firstName(),
             email: faker.internet.email(),
@@ -25,4 +31,44 @@ async function createUsers() {
     usersIds = await Promise.all(usersPromises)
 }
 
-createUsers()
+async function createProducts() {
+    let products = []
+
+    while (products.length < totalProducts) {
+        products.push({
+            category_id: Math.ceil(Math.random() * 7),
+            user_id: usersIds[Math.floor(Math.random() * totalUsers)],
+            name: faker.name.title(),
+            description: faker.lorem.paragraph(Math.ceil(Math.random() * 10)),
+            old_price: faker.random.number(9999),
+            price: faker.random.number(9999),
+            quantity: faker.random.number(99),
+            status: Math.round(Math.random())
+        })
+    }
+
+    const productsPromises = products.map(product => Product.create(product))
+
+    productsIds = await Promise.all(productsPromises)
+
+    let files = []
+
+    while (files.length < 50) {
+        files.push({
+            name: faker.name.title(),
+            path: `public/images/placeholder.png`,
+            product_id: productsIds[Math.floor(Math.random() * totalProducts)]
+        })
+    }
+
+    const filesPromises = files.map(file => File.create(file))
+
+    await Promise.all(filesPromises)
+}
+
+async function init() {
+    await createUsers()
+    await createProducts()
+}
+
+init()
