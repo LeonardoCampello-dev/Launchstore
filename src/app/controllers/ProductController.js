@@ -1,3 +1,5 @@
+const { unlinkSync } = require('fs')
+
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
@@ -30,7 +32,7 @@ module.exports = {
                 error: 'Por favor, insira pelo menos uma imagem'
             })
 
-            const {
+            let {
                 category_id,
                 name,
                 description,
@@ -54,11 +56,11 @@ module.exports = {
             })
 
             const filesPromises = req.files.map(file =>
-                File.create({ ...file, product_id }))
+                File.create({ name: file.filename, path: file.path, product_id }))
 
             await Promise.all(filesPromises)
 
-            return res.redirect(`products/${productId}/edit`)
+            return res.redirect(`products/${product_id}/edit`)
         } catch (error) {
             console.error(error)
             return res.render('products/create.njk', {
@@ -125,7 +127,7 @@ module.exports = {
             const keys = Object.keys(req.body)
 
             for (key of keys) {
-                if (req.body[key] == '' && key != removed_files) {
+                if (req.body[key] == '' && key != 'removed_files') {
                     return res.render('products/edit.njk', {
                         error: 'Por favor, preencha todos os campos!'
                     })
@@ -158,7 +160,7 @@ module.exports = {
                 req.body.old_price = oldProduct.price
             }
 
-            await Product.update({
+            await Product.update(req.body.id, {
                 category_id: req.body.category_id,
                 name: req.body.name,
                 description: req.body.description,
@@ -170,15 +172,22 @@ module.exports = {
 
             return res.redirect(`/products/${req.body.id}`)
         } catch (error) {
-            return res.render(`/products/${req.body.id}`, {
-                product: req.body,
-                error: 'Erro ao atualizar o produto!'
-            })
+            console.error(error)
         }
     },
     async delete(req, res) {
         try {
+            const files = await Product.files(req.body.id)
+
             await Product.delete(req.body.id)
+
+            files.map(file => {
+                try {
+                    unlinkSync(file.path)
+                } catch (error) {
+                    console.error(error)
+                }
+            })
 
             return res.redirect('/products/create')
         } catch (error) {

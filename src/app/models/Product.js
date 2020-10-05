@@ -8,7 +8,7 @@ module.exports = {
     ...Base,
     async files(id) {
         try {
-            await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
+            const results = await db.query(`SELECT * FROM files WHERE product_id = $1`, [id])
 
             return results.rows
         } catch (error) {
