@@ -18,13 +18,13 @@
                 style="background-image: url({{ product.img if product.img else '/assets/not-found.svg' }})"
             ></div>
 
-            {% if product.oldPrice != product.price %}
+            {% if product.formattedOldPrice != product.formattedPrice %}
 
-            <div class="old-price">{{ product.oldPrice }}</div>
+            <div class="old-price">{{ product.formattedOldPrice }}</div>
 
             {% endif %}
 
-            <p>{{ product.price }}</p>
+            <p>{{ product.formattedPrice }}</p>
 
             <h4>{{ product.name }}</h4>
 

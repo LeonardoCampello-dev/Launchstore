@@ -3,8 +3,7 @@ const { unlinkSync } = require('fs')
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
-
-const { date, formatPrice } = require('../../lib/utils')
+const LoadProductServices = require('../services/LoadProductServices')
 
 module.exports = {
     async create(req, res) {
@@ -71,53 +70,24 @@ module.exports = {
     },
     async show(req, res) {
         try {
-            const product = await Product.find(req.params.id)
-
-            if (!product) return res.render('products/show.njk', {
-                error: 'Produto não encontrado!'
+            const product = await LoadProductServices.load('product', {
+                where: { id: req.params.id }
             })
 
-            const { minutes, hours, day, month } = date(product.updated_at)
-
-            product.published = {
-                date: `${day}/${month}`,
-                time: `${hours}h${minutes}`
-            }
-
-            product.oldPrice = formatPrice(product.old_price)
-            product.price = formatPrice(product.price)
-
-            let files = await Product.files(product.id)
-            files = files.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            return res.render('products/show.njk', { product, files })
+            return res.render('products/show.njk', { product })
         } catch (error) {
             console.error(error)
         }
     },
     async edit(req, res) {
         try {
-            const product = await Product.find(req.params.id)
-
-            if (!product) return res.render('products/edit.njk', {
-                error: 'Produto não encontrado!'
+            const product = await LoadProductServices.load('product', {
+                where: { id: req.params.id }
             })
-
-            product.old_price = formatPrice(product.old_price)
-            product.price = formatPrice(product.price)
 
             const categories = await Category.findAll()
 
-            let files = await Product.files(product.id)
-            files = files.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            return res.render('products/edit.njk', { product, categories, files })
+            return res.render('products/edit.njk', { product, categories })
         } catch (error) {
             console.error(error)
         }

@@ -15,7 +15,7 @@ module.exports = {
             console.error(error)
         }
     },
-    search({ filter, category }) {
+    async search({ filter, category }) {
         try {
             let query = '',
                 filterQuery = ''
@@ -36,9 +36,11 @@ module.exports = {
             LEFT JOIN categories ON (categories.id = products.category_id)
             WHERE 1 = 1
             ${filterQuery}
-        `
+            `
 
-            return db.query(query)
+            const results = await db.query(query)
+
+            return results.rows
         } catch (error) {
             console.error(error)
         }
