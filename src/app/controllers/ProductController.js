@@ -17,20 +17,6 @@ module.exports = {
     },
     async post(req, res) {
         try {
-            const keys = Object.keys(req.body)
-
-            for (key of keys) {
-                if (req.body[key] == ' && key != removed_files') {
-                    return res.render('products/create.njk', {
-                        error: 'Por favor, preencha todos os campos!'
-                    })
-                }
-            }
-
-            if (req.files.length == 0) res.render('products/create.njk', {
-                error: 'Por favor, insira pelo menos uma imagem'
-            })
-
             let {
                 category_id,
                 name,
@@ -94,16 +80,6 @@ module.exports = {
     },
     async put(req, res) {
         try {
-            const keys = Object.keys(req.body)
-
-            for (key of keys) {
-                if (req.body[key] == '' && key != 'removed_files') {
-                    return res.render('products/edit.njk', {
-                        error: 'Por favor, preencha todos os campos!'
-                    })
-                }
-            }
-
             if (req.files.length != 0) {
                 const newFilesPromises = req.files.map(file =>
                     File.create({ ...file, product_id: req.body.id }))
