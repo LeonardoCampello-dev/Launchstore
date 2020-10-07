@@ -3,6 +3,7 @@ const { hash } = require('bcryptjs')
 
 const User = require('../models/User')
 const Product = require('../models/Product')
+const LoadProductsService = require('../services/LoadProductServices')
 
 const { formatCpfCnpj, formatCep } = require('../../lib/utils')
 
@@ -114,6 +115,21 @@ module.exports = {
                 user: req.body,
                 error: 'Erro ao tentar deletar conta!'
             })
+        }
+    },
+    async ads(req, res) {
+        try {
+            const products = await LoadProductsService.load('products', {
+                where: { user_id: req.session.userId }
+            })
+
+            if (!products) return res.render('products/create.njk', {
+                error: 'Você ainda não cadastrou nenhum produto!'
+            })
+
+            return res.render('products/ads.njk', { products })
+        } catch (error) {
+            console.error(error)
         }
     }
 }
