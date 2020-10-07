@@ -1,10 +1,10 @@
 {% extends "../layout.njk" %}
 
-{% import "parts/card.njk" as cards %}
+{% import "parts/card.njk" as card %}
 
 {% block content %}
 
-    {% call cards.render('Meus anúncios', 'container user-ads') %}
+    {% call card.render('Meus anúncios', 'container user-ads') %}
 
     <div class="items">
 
@@ -21,8 +21,8 @@
 
                 <div class="actions">
 
-                    <a href="/products/{{ product.id }}/edit">Editar</a>
                     <a href="/products/{{ product.id }}">Ver</a>
+                    <a href="/products/{{ product.id }}/edit">Editar</a>
                     
                 </div>
                 
