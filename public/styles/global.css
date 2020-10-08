@@ -23,11 +23,17 @@ html, body {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
 
     display: flex;
     flex-direction: column;
+}
+
+body,
+input,
+select,
+textarea {
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {

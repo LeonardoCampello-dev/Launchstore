@@ -1,5 +1,5 @@
 <h1 align ="center">
-    <img src="./.github/logo.png">
+    <img src="../Launchstore/public/images/placeholder.png" width="100">
 </h1>
 
 > Launchstore is a simple application built with JavaScript and SQL queries 💰
@@ -13,8 +13,9 @@
 
 - 🛒 Buying and selling products.
 - 📃 Search by categories.
-- 🔍 Product filter.
 - 🖼 Upload images.
+- 🔑 Password recovery and session.
+- 🎞 Post-order animations.
 
 ## 🚀 Technologies used
 
@@ -22,18 +23,20 @@ The following technologies were used
 
 - [x] [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [x] [Node.js](https://nodejs.org/en/)
-- [x] [Nunjucks](https://mozilla.github.io/nunjucks/)
 - [x] [PostgreSQL](https://www.postgresql.org/)
 
 ### 📜 **Libraries**
 
-- [x] [Browsersync](https://www.browsersync.io/)
+- [x] [browsersync](https://www.browsersync.io/)
 - [x] [npm-run-all](https://www.npmjs.com/package/npm-run-all)
 - [x] [method-override](https://www.npmjs.com/package/method-override)
 - [x] [node-postgres](https://www.npmjs.com/package/pg) 
 - [x] [nodemon](https://www.npmjs.com/package/nodemon) 
 - [x] [multer](https://www.npmjs.com/package/multer) 
 - [x] [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [x] [express-session](https://www.npmjs.com/package/express-session) 
+- [x] [nodemailer](https://nodemailer.com/about/) 
+- [x] [lottie](https://github.com/airbnb/lottie-web) 
 
 ## 🎨 Layout
 
@@ -43,11 +46,27 @@ The following technologies were used
 
 **Search/Categories**
 
-![filter](./.github/filter.png)
+![search](./.github/search.png)
 
 **Product**
 
 ![product](./.github/product.png)
+
+**Post-order animation**
+
+![post-order](.github/order-success.png)
+
+**Login**
+
+![login](.github/login.png)
+
+**User**
+
+![user](.github/user.png)
+
+**Sending emails**
+
+![send](.github/email.png)
 
 ---
 

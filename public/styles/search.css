@@ -3,6 +3,7 @@
 .search-products {
     display: grid;
     grid-template-columns: 200px 1fr;
+    gap: 16px;
 
     margin-top: 48px;
 }
@@ -16,7 +17,7 @@
 
 .search-products .header h2 {
     font-size: 32px;
-    text-transform: capitalize;
+    text-transform: uppercase;
 
     margin-bottom: 8px;
 }
