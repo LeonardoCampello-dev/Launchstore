@@ -1,5 +1,5 @@
 <h1 align ="center">
-    <img src="../Launchstore/public/images/placeholder.png" width="100">
+    <img src="./.github/placeholder.png" width="100">
 </h1>
 
 > Launchstore is a simple application built with JavaScript and SQL queries 💰
