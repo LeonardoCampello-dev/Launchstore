@@ -28,8 +28,6 @@ const email = (product, seller, buyer) => `
 module.exports = {
     async post(req, res) {
         try {
-            console.log(`id: ${req.body.id}`)
-
             const product = await LoadProductServices.load('product', {
                 where: {
                     id: req.body.id
