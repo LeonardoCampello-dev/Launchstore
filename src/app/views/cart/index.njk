@@ -31,7 +31,7 @@
                     
                     <form action="/cart/{{ item.product.id }}/remove-one" method="POST">
                         <button class="remove">
-                            <i class="material-icons">remove_circle_outline</i>
+                            <i class="material-icons">remove_shopping_cart</i>
                         </button>
                     </form>
                     
@@ -39,7 +39,7 @@
                     
                     <form action="/cart/{{ item.product.id }}/add-one" method="POST">
                         <button class="add">
-                            <i class="material-icons">add_circle_outline</i>
+                            <i class="material-icons">add_shopping_cart</i>
                         </button>
                     </form>
 
@@ -50,7 +50,7 @@
                     method="POST" 
                     class="trash"
                 >
-                    <button class="remove">
+                    <button class="delete">
                         <i class="material-icons">delete</i>
                     </button>
 
@@ -67,7 +67,7 @@
         </div>
 
         <div class="actions">
-            <a href="/products/search" class="button">Continuar comprando</a>
+            <a href="/products/search" class="button shop">Continuar comprando</a>
 
             <form action="/orders" method="POST">
                 <button class="button order">Realizar pedido</button>
