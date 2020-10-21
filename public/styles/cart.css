@@ -138,8 +138,47 @@
     font-size: 20px;
 }
 
+.cart-empty img {
+    width: 308px;
+
+    margin: 24px 0;
+}
+
 .cart-empty a {
     width: 240px;
 
     margin: 16px auto 8px;
+}
+
+header div.container {
+    grid-template-columns: 220px auto 315px;
+    gap: 8px;
+}
+
+li#cart-status-info a {
+    position: relative;
+}
+
+li#cart-status-info a span {
+    background-color: var(--error-color);
+    border-radius: 50%;
+
+    width: 20px;
+    height: 20px;
+
+    position: absolute;
+    top: 12px;
+    right: 0px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+li#cart-status-info a:hover span {
+    background-color: #fff;
+    color: var(--text-base);
 }
