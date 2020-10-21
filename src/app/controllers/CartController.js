@@ -27,7 +27,15 @@ module.exports = {
 
         req.session.cart = cart
 
-        console.log(cart)
+        return res.redirect('/cart')
+    },
+    removeOne(req, res) {
+        let { id } = req.params
+        let { cart } = req.session
+
+        if (!cart) return res.redirect('/cart')
+
+        req.session.cart = Cart.init(cart).removeOne(id)
 
         return res.redirect('/cart')
     }
