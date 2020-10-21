@@ -179,6 +179,5 @@ li#cart-status-info a span {
 }
 
 li#cart-status-info a:hover span {
-    background-color: #fff;
-    color: var(--text-base);
+    color: #fff;
 }
