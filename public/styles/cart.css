@@ -129,3 +129,17 @@
 .cart .button.order:hover {
     background-color: #0a990a;
 }
+
+.cart-empty {
+    text-align: center;
+}
+
+.cart-empty p {
+    font-size: 20px;
+}
+
+.cart-empty a {
+    width: 240px;
+
+    margin: 16px auto 8px;
+}
