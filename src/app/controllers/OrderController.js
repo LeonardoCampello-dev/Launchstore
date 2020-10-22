@@ -1,7 +1,9 @@
 const LoadProductServices = require('../services/LoadProductServices')
 const User = require('../models/User')
+const Order = require('../models/Order')
 
 const mailer = require('../../lib/mailer')
+const Cart = require('../../lib/cart')
 const { formatCpfCnpj, formatCep } = require('../../lib/utils')
 
 const email = (product, seller, buyer) => `
@@ -28,21 +30,46 @@ const email = (product, seller, buyer) => `
 module.exports = {
     async post(req, res) {
         try {
-            const product = await LoadProductServices.load('product', {
-                where: {
-                    id: req.body.id
-                }
+            const cart = Cart.init(req.session.cart)
+
+            const buyer_id = req.session.userId
+
+            const filteredItems = cart.items.filter(item => item.product.user_id != buyer_id)
+
+            const createOrdersPromises = filteredItems.map(async item => {
+                let { product, price: total, quantity } = item
+                const { price, id: product_id, user_id: seller_id } = product
+                const status = 'open'
+
+                const order = await Order.create({
+                    seller_id,
+                    buyer_id,
+                    product_id,
+                    price,
+                    quantity,
+                    total,
+                    status
+                })
+
+                product = await LoadProductServices.load('product', {
+                    where: { id: product_id }
+                })
+
+                const seller = await User.findOne({ where: { id: seller_id } })
+
+                const buyer = await User.findOne({ where: { id: buyer_id } })
+
+                await mailer.sendMail({
+                    from: 'no-reply@launchstore.com.br',
+                    to: seller.email,
+                    subject: 'Novo pedido de compra! 🛒',
+                    html: email(product, seller, buyer)
+                })
+
+                return order
             })
 
-            const seller = await User.findOne({ where: { id: product.user_id } })
-            const buyer = await User.findOne({ where: { id: req.session.userId } })
-
-            await mailer.sendMail({
-                from: 'no-reply@launchstore.com.br',
-                to: seller.email,
-                subject: 'Novo pedido de compra! 🛒',
-                html: email(product, seller, buyer)
-            })
+            await Promise.all(createOrdersPromises)
 
             return res.render('orders/success.njk')
         } catch (error) {
