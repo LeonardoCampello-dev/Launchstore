@@ -29,43 +29,49 @@ const email = (product, seller, buyer) => `
 
 module.exports = {
     async index(req, res) {
-        let orders = await Order.findAll({
-            where: { buyer_id: req.session.userId }
-        })
-
-        const getOrdersPromises = orders.map(async order => {
-
-            order.products = await LoadProductServices.load('products', {
-                where: { id: order.product_id }
+        try {
+            let orders = await Order.findAll({
+                where: { buyer_id: req.session.userId }
             })
 
-            order.buyer = await User.findOne({
-                where: { id: order.buyer_id }
+            const getOrdersPromises = orders.map(async order => {
+
+                order.products = await LoadProductServices.load('products', {
+                    where: { id: order.product_id }
+                })
+
+                order.buyer = await User.findOne({
+                    where: { id: order.buyer_id }
+                })
+
+                order.seller = await User.findOne({
+                    where: { id: order.seller_id }
+                })
+
+                order.formattedPrice = formatPrice(order.price)
+                order.formattedTotal = formatPrice(order.total)
+
+                const statusTypes = {
+                    open: 'Aberto',
+                    sold: 'Vendido',
+                    canceled: 'Cancelado'
+                }
+
+                order.formattedStatus = statusTypes[order.status]
+
+                const updatedAt = date(order.updated_at)
+
+                order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hours}h${updatedAt.minutes}`
+
+                return order
             })
 
-            order.seller = await User.findOne({
-                where: { id: order.seller_id }
-            })
+            orders = await Promise.all(getOrdersPromises)
 
-            order.formattedPrice = formatPrice(order.price)
-            order.formattedTotal = formatPrice(order.total)
-
-            const statusTypes = {
-                open: 'Aberto',
-                sold: 'Vendido',
-                canceled: 'Cancelado'
-            }
-
-            order.formattedStatus = statusTypes[order.status]
-
-            const updatedAt = date(updatedAt)
-
-            order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hours}h${updatedAt.minutes}`
-        })
-
-        orders = await Promise.all(getOrdersPromises)
-
-        return res.render('orders/index.njk', { orders })
+            return res.render('orders/index.njk', { orders })
+        } catch (error) {
+            console.error(error)
+        }
     },
     async post(req, res) {
         try {
