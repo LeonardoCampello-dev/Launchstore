@@ -4,7 +4,7 @@ const Order = require('../models/Order')
 
 const mailer = require('../../lib/mailer')
 const Cart = require('../../lib/cart')
-const { formatCpfCnpj, formatCep } = require('../../lib/utils')
+const { formatCpfCnpj, formatCep, formatPrice, date } = require('../../lib/utils')
 
 const email = (product, seller, buyer) => `
 <h2>Olá ${seller.name} 😁</h2>
@@ -28,6 +28,45 @@ const email = (product, seller, buyer) => `
 `
 
 module.exports = {
+    async index(req, res) {
+        let orders = await Order.findAll({
+            where: { buyer_id: req.session.userId }
+        })
+
+        const getOrdersPromises = orders.map(async order => {
+
+            order.products = await LoadProductServices.load('products', {
+                where: { id: order.product_id }
+            })
+
+            order.buyer = await User.findOne({
+                where: { id: order.buyer_id }
+            })
+
+            order.seller = await User.findOne({
+                where: { id: order.seller_id }
+            })
+
+            order.formattedPrice = formatPrice(order.price)
+            order.formattedTotal = formatPrice(order.total)
+
+            const statusTypes = {
+                open: 'Aberto',
+                sold: 'Vendido',
+                canceled: 'Cancelado'
+            }
+
+            order.formattedStatus = statusTypes[order.status]
+
+            const updatedAt = date(updatedAt)
+
+            order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hours}h${updatedAt.minutes}`
+        })
+
+        orders = await Promise.all(getOrdersPromises)
+
+        return res.render('orders/index.njk', { orders })
+    },
     async post(req, res) {
         try {
             const cart = Cart.init(req.session.cart)
@@ -70,6 +109,9 @@ module.exports = {
             })
 
             await Promise.all(createOrdersPromises)
+
+            delete req.session.cart
+            Cart.init()
 
             return res.render('orders/success.njk')
         } catch (error) {
