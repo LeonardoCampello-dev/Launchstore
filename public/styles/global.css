@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #fd951f;
-    --secondary-color: #00b0eae8;
+    --primary-color: #6E0AD6;
+    --secondary-color: #F78323;
     --text-base: #333;
     --bg-color: #efefef;
     --success-color: #00a000;
@@ -68,7 +68,7 @@ textarea {
 }
 
 .button:hover {
-    background-color: #cc7817;
+    background-color: #4c0994;
     transition: 0.2s;
 }
 
@@ -77,11 +77,11 @@ textarea {
 }
 
 .button.edit:hover {
-    background-color: #2b9bdb;
+    background-color: #b66422;
 }
 
 .button.delete {
-    background-color: #cccccc;
+    background-color: #111;
 }
 
 .button.delete:hover {
