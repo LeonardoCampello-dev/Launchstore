@@ -1,10 +1,10 @@
-const LoadProductServices = require('../services/LoadProductServices')
+const LoadOrderServices = require('../services/LoadOrderServices')
 const User = require('../models/User')
 const Order = require('../models/Order')
 
 const mailer = require('../../lib/mailer')
 const Cart = require('../../lib/cart')
-const { formatCpfCnpj, formatCep, formatPrice, date } = require('../../lib/utils')
+const { formatCpfCnpj, formatCep } = require('../../lib/utils')
 
 const email = (product, seller, buyer) => `
 <h2>Olá ${seller.name} 😁</h2>
@@ -30,45 +30,22 @@ const email = (product, seller, buyer) => `
 module.exports = {
     async index(req, res) {
         try {
-            let orders = await Order.findAll({
+            const orders = await LoadOrderServices.load('orders', {
                 where: { buyer_id: req.session.userId }
             })
 
-            const getOrdersPromises = orders.map(async order => {
-
-                order.product = await LoadProductServices.load('product', {
-                    where: { id: order.product_id }
-                })
-
-                order.buyer = await User.findOne({
-                    where: { id: order.buyer_id }
-                })
-
-                order.seller = await User.findOne({
-                    where: { id: order.seller_id }
-                })
-
-                order.formattedPrice = formatPrice(order.price)
-                order.formattedTotal = formatPrice(order.total)
-
-                const statusTypes = {
-                    open: 'Aberto',
-                    canceled: 'Cancelado',
-                    sold: 'Vendido'
-                }
-
-                order.formattedStatus = statusTypes[order.status]
-
-                const updatedAt = date(order.updated_at)
-
-                order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hours}h${updatedAt.minutes}`
-
-                return order
+            return res.render('orders/index.njk', { orders })
+        } catch (error) {
+            console.error(error)
+        }
+    },
+    async sales(req, res) {
+        try {
+            const sales = await LoadOrderServices.load('orders', {
+                where: { seller_id: req.session.userId }
             })
 
-            orders = await Promise.all(getOrdersPromises)
-
-            return res.render('orders/index.njk', { orders })
+            return res.render('orders/index.njk', { sales })
         } catch (error) {
             console.error(error)
         }
