@@ -36,7 +36,7 @@ module.exports = {
 
             const getOrdersPromises = orders.map(async order => {
 
-                order.products = await LoadProductServices.load('products', {
+                order.product = await LoadProductServices.load('product', {
                     where: { id: order.product_id }
                 })
 
@@ -53,8 +53,8 @@ module.exports = {
 
                 const statusTypes = {
                     open: 'Aberto',
-                    sold: 'Vendido',
-                    canceled: 'Cancelado'
+                    canceled: 'Cancelado',
+                    sold: 'Vendido'
                 }
 
                 order.formattedStatus = statusTypes[order.status]
