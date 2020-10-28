@@ -130,3 +130,123 @@
 .orders .status.canceled {
     background-color: var(--error-color);
 }
+
+/* DETAILS */
+
+.order-details {
+    max-width: 700px;
+}
+
+.order-details .info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    font-size: 14px;
+    font-weight: lighter;
+    
+    margin-bottom: 24px;
+}
+
+.order-details .info .buyer div,
+.order-details .info .seller div {
+    margin-bottom: 4px;
+}
+
+.order-details .info h4 {
+    color: var(--primary-color);
+
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.order-details .info h5 {
+    color: #333;
+    letter-spacing: .2px;
+    
+    margin-top: 8px;
+}
+
+.order-details .info .status {
+    text-align: right;
+}
+
+.order-details .info .status.open h2 {
+    color: var(--secondary-color);
+}
+
+.order-details .info .status.sold h2 {
+    color: var(--success-color);
+}
+
+.order-details .info .status.canceled h2 {
+    color: var(--error-color);
+}
+
+.order-details .info .status p {
+    color: #555;
+    
+    font-size: 12px;
+
+    margin-top: 4px;
+}
+
+.order-details .product {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    border-top: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+
+    padding: 16px 0;
+    margin-bottom: 16px;
+}
+
+.order-details .product img {
+    width: 64px;
+    height: 64px;
+
+    object-fit: contain;
+
+    margin-right: 16px;
+}
+
+.order-details .product .name {
+    font-size: 20px;
+}
+
+.order-details .product .price {
+    color: #444;
+
+    font-weight: bold;
+    text-align: right;
+
+    flex: 1;
+}
+
+.order-details .product .price .quantity {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.order-details .total {
+    color: #333;
+
+    font-size: 22px;
+    font-weight: bold;
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.order-details .total span {
+    font-size: 14px;
+    font-weight: normal;
+
+    margin-right: 8px;
+} 
+
