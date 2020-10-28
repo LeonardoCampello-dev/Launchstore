@@ -42,7 +42,7 @@
 
 .orders .item-container {
     display: grid;
-    grid-template-columns: 1fr auto auto 100px;
+    grid-template-columns: 1fr auto auto 100px 100px;
     align-items: center;
 
     gap: 32px;
