@@ -2,7 +2,7 @@ const LoadProductServices = require('./LoadProductServices')
 const Order = require('../models/Order')
 const User = require('../models/User')
 
-const { formatPrice, date } = require('../../lib/utils')
+const { formatPrice, date, formatCpfCnpj, formatCep } = require('../../lib/utils')
 
 async function format(order) {
     order.product = await LoadProductServices.load('product', {
@@ -16,6 +16,12 @@ async function format(order) {
     order.seller = await User.findOne({
         where: { id: order.seller_id }
     })
+
+    order.buyer.formattedCpfCpnj = formatCpfCnpj(order.buyer.cpf_cnpj)
+    order.buyer.formattedCep = formatCep(order.buyer.cep)
+
+    order.seller.formattedCpfCpnj = formatCpfCnpj(order.seller.cpf_cnpj)
+    order.seller.formattedCep = formatCep(order.seller.cep)
 
     order.formattedPrice = formatPrice(order.price)
     order.formattedTotal = formatPrice(order.total)

@@ -45,7 +45,7 @@ module.exports = {
                 where: { seller_id: req.session.userId }
             })
 
-            return res.render('orders/index.njk', { sales })
+            return res.render('orders/sales.njk', { sales })
         } catch (error) {
             console.error(error)
         }
@@ -100,6 +100,17 @@ module.exports = {
         } catch (error) {
             console.error(error)
             return res.render('orders/error.njk')
+        }
+    },
+    async show(req, res) {
+        try {
+            const order = await LoadOrderServices.load('order', {
+                where: { id: req.params.id }
+            })
+
+            return res.render('orders/details.njk', { order })
+        } catch (error) {
+            console.error(error)
         }
     }
 }
