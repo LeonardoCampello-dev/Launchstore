@@ -52,8 +52,6 @@ CREATE TABLE "users" (
   "updated_at" timestamp DEFAULT (now())
 );
 
--- foreign key
-
 ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 -- create procedure
@@ -141,3 +139,23 @@ CREATE TABLE "orders" (
 ALTER TABLE "orders" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("buyer_id") REFERENCES "users" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
+-- Soft delete
+-- 1. Create a column in the product table called deleted_at
+ALTER TABLE products ADD COLUMN "deleted_at" timestamp;
+
+-- 2. Create a rule that will be used every time we call delete
+CREATE OR REPLACE RULE delete_product AS
+ON DELETE TO products DO INSTEAD 
+UPDATE products
+SET deleted_at = now()
+WHERE products.id = old.id;
+
+-- 3. Create a VIEW that will pull only the active data
+
+CREATE VIEW products AS 
+SELECT * FROM products_with_deleted WHERE deleted_at IS NULL;
+
+-- 4. Rename view and table
+
+ALTER TABLE products RENAME TO products_with_deleted;

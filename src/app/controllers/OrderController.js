@@ -5,6 +5,7 @@ const Order = require('../models/Order')
 const mailer = require('../../lib/mailer')
 const Cart = require('../../lib/cart')
 const { formatCpfCnpj, formatCep } = require('../../lib/utils')
+const { update } = require('../models/Order')
 
 const email = (product, seller, buyer) => `
 <h2>Olá ${seller.name} 😁</h2>
@@ -109,6 +110,33 @@ module.exports = {
             })
 
             return res.render('orders/details.njk', { order })
+        } catch (error) {
+            console.error(error)
+        }
+    },
+    async update(req, res) {
+        try {
+            const { id, action } = req.params
+
+            const acceptedActions = ['sold', 'canceled']
+
+            if (!acceptedActions.includes(action)) return res.send('Ação não permitida.')
+
+            const order = await LoadOrderServices.load('order', {
+                where: { id }
+            })
+
+            if (!order) return res.send('Pedido não encontrado!')
+
+            if (order.status != 'open') return res.send('O status do pedido não pode ser alterado.')
+
+            order.status = action
+
+            await Order.update(id, {
+                status: order.status
+            })
+
+            return res.redirect('/orders/sales')
         } catch (error) {
             console.error(error)
         }
