@@ -11,11 +11,12 @@
 
 ## 📌 Resources 
 
-- 🛒 Buying and selling products.
+- 💰 Buying and selling products.
 - 📃 Search by categories.
 - 🖼 Upload images.
 - 🔑 Password recovery and session.
 - 🎞 Post-order animations.
+- 🛒 Cart and order management
 
 ## 🚀 Technologies used
 
@@ -52,6 +53,22 @@ The following technologies were used
 
 ![product](./.github/product.png)
 
+**Cart**
+
+![cart](.github/cart.png)
+
+**Ads**
+
+![ads](.github/ads.png)
+
+**Sales**
+
+![my-sales](.github/sales.png)
+
+**Orders**
+
+![orders](.github/orders.png)
+
 **Post-order animation**
 
 ![post-order](.github/order-success.png)
@@ -64,9 +81,9 @@ The following technologies were used
 
 ![user](.github/user.png)
 
-**Sending emails**
+**Menu dropdown**
 
-![send](.github/email.png)
+![menu](.github/dropdown.png)
 
 ---
 
