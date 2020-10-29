@@ -59,7 +59,7 @@ The following technologies were used
 
 **Ads**
 
-![ads](.github/ads.png)
+![ads](.github/user-ads.png)
 
 **Sales**
 
