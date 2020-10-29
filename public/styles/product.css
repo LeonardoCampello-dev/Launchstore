@@ -71,8 +71,8 @@
     background-color: #fff;
     box-shadow: 0px 0px 8px var(--text-base);
     
-    width: 90%;
-    height: 90%;
+    width: 55%;
+    height: 55%;
     
     margin: auto;
 
@@ -130,14 +130,23 @@
 /* PRICE BUY */
 
 .product-single .unavailable {
-    background-color: #eee;
-    color: var(--text-base);
+    background-color: var(--primary-color);
+    color: #fff;
     
     font-size: 14px;
     font-weight: bold;
     
     padding: 8px 16px;
     border-radius: 4px;
+}
+
+.product-single .invalid {
+    color: var(--error-color);
+    
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .2px;
 }
 
 .product-single .price-buy {

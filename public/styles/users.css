@@ -81,7 +81,7 @@
 .user-ads .item .info .actions a {
     margin-right: 16px;
 
-    color: var(--primary-color);
+    color: var(--text-base);
 
     transition: .2s;
 }
