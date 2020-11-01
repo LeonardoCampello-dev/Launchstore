@@ -89,20 +89,33 @@ The following technologies were used
 
 ## Project installation 👷‍♂️
 
-First you need to have [Node.js](https://nodejs.org/en/) installed, then **run the following command:**
+First you need to have [Node.js](https://nodejs.org/en/) installed and then **follow these steps:**
 
 ``` bash 
-## To clone the project
+## 1. Clone the project
 git clone https://github.com/LeonardoCampello-dev/Foodfy.git
 ```
 
 ``` bash 
-## To install the dependencies
+## 2. Install the dependencies
 npm install
 ```
 
+``` bash
+## 3. Add your database access credentials to the src/config/db.js file (The database used in this project is PostgreSQL)
+```
+
+``` bash
+## 4. With the database active, run the following command at the root of the project to populate the tables:
+npm run seeds.js
+```
+
 ``` bash 
-## Running project
+## 5. Add, if it does not already exist, an image in the public/images folder and use the name 'placeholder.png'. This file will serve as an image for all application entities.
+```
+
+``` bash 
+## 6 Finally, execute the command to start the application: .
 npm start
 ```
 
