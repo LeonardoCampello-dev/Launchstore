@@ -1,11 +1,12 @@
 const LoadOrderServices = require('../services/LoadOrderServices')
+const LoadProductServices = require('../services/LoadProductServices')
+
 const User = require('../models/User')
 const Order = require('../models/Order')
 
 const mailer = require('../../lib/mailer')
 const Cart = require('../../lib/cart')
 const { formatCpfCnpj, formatCep } = require('../../lib/utils')
-const { update } = require('../models/Order')
 
 const email = (product, seller, buyer) => `
 <h2>Olá ${seller.name} 😁</h2>
