@@ -1,15 +1,39 @@
-<h1 align ="center">
-    <img src="./.github/placeholder.png" width="100">
+<h1 align="center">
+    <img 
+        src="./.github/placeholder.png" 
+        width="150"
+        alt="Cart"
+    >
 </h1>
 
-> Launchstore is a simple application built with JavaScript and SQL queries 💰
+<h1 align="center">Launchstore 🧡</h1>
 
-![Author](https://img.shields.io/badge/Author-Leonardo%20Campello-orange)
-![GitHub repo size](https://img.shields.io/github/repo-size/LeonardoCampello-dev/Launchstore?color=orange)
-![License](https://img.shields.io/github/license/LeonardoCampello-dev/Launchstore?color=orange)
-![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)
+<h4 align="center">
 
-## 📌 Resources 
+[View demo](#-demonstration) · [Report bug](#-contribuindo)
+    
+</h4>
+
+<h2> 📘 Index </h2> 
+
+- [👨‍🏫 About](#-about)
+  - [📌 Resources](#-resources)
+- [🚀 Technology](#-technology)
+  - [📚 Libraries](#-libraries)
+- [🎬 Demonstration](#-demonstration)
+- [☕ Prerequisites](#-prerequisites)
+- [🔧 Installing](#-installing)
+- [💿 Using](#-using)
+- [📮 Contributing](#-contributing)
+- [🤟 Collaborators](#-collaborators)
+  - [😎 Become a contributor](#-become-a-contributor)
+- [📜 License](#-license)
+
+## 👨‍🏫 About 
+
+Launchstore is a simple application built with JavaScript and SQL queries 💰
+
+### 📌 Resources 
 
 - 💰 Buying and selling products.
 - 📃 Search by categories.
@@ -18,15 +42,13 @@
 - 🎞 Post-order animations.
 - 🛒 Cart and order management
 
-## 🚀 Technologies used
-
-The following technologies were used
+## 🚀 Technology 
 
 - [x] [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [x] [Node.js](https://nodejs.org/en/)
 - [x] [PostgreSQL](https://www.postgresql.org/)
 
-### 📜 **Libraries**
+### 📚 Libraries 
 
 - [x] [browsersync](https://www.browsersync.io/)
 - [x] [npm-run-all](https://www.npmjs.com/package/npm-run-all)
@@ -39,57 +61,29 @@ The following technologies were used
 - [x] [nodemailer](https://nodemailer.com/about/) 
 - [x] [lottie](https://github.com/airbnb/lottie-web) 
 
-## 🎨 Layout
+
+## 🎬 Demonstration
 
 **Home**
 
 ![home](./.github/home.png)
 
-**Search/Categories**
-
-![search](./.github/search.png)
-
 **Product**
 
 ![product](./.github/product.png)
 
-**Cart**
+> To see more screenshots or videos, click [HERE.](./images.md)
 
-![cart](.github/cart.png)
+## ☕ Prerequisites
 
-**Ads**
+Before getting your hands dirty, make sure you meet the following requirements:
 
-![ads](.github/user-ads.png)
+- [ ] Have Node.js installed
+- [ ] Have PostgreSQL installed
 
-**Sales**
+## 🔧 Installing 
 
-![my-sales](.github/sales.png)
-
-**Orders**
-
-![orders](.github/orders.png)
-
-**Post-order animation**
-
-![post-order](.github/order-success.png)
-
-**Login**
-
-![login](.github/login.png)
-
-**User**
-
-![user](.github/user.png)
-
-**Menu dropdown**
-
-![menu](.github/dropdown.png)
-
----
-
-## Project installation 👷‍♂️
-
-First you need to have [Node.js](https://nodejs.org/en/) installed and then **follow these steps:**
+To install, follow the steps:
 
 ``` bash 
 ## 1. Clone the project
@@ -110,6 +104,10 @@ npm install
 npm run seeds.js
 ```
 
+## 💿 Using
+
+To use, follow the steps:
+
 ``` bash 
 ## 5. Add, if it does not already exist, an image in the public/images folder and use the name 'placeholder.png'. This file will serve as an image for all application entities.
 ```
@@ -119,8 +117,37 @@ npm run seeds.js
 npm start
 ```
 
-## 📜 License 
+## 📮 Contributing 
 
-Released in 2020. This project is under the [MIT license](/LICENSE).
+If this is your first contribution, [see the following tutorial.](https://github.com/firstcontributions/first-contributions)
 
-## Made with love by Leonardo Campello 💚 
+## 🤟 Collaborators 
+
+We thank the following developers who contributed:  
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img 
+          src="https://avatars0.githubusercontent.com/u/66227219?s=460&u=c99b9c6d3539ff9de7823673c83df61b28f33cf4&v=4" 
+          width="100" 
+          alt="Leonardo Campello"
+        /> <br>
+        <sub>
+          <b>Leonardo Campello</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+### 😎 Become a contributor  
+
+Would you like to be part of this project? Click [HERE](https://github.com/firstcontributions/first-contributions) and read the instructions to contribute.
+
+## 📜 License
+
+Made in 2020. This project is under the [MIT license.](./LICENSE)
+
+<h2> Made with 💚 by Leonardo Campello </h2>
