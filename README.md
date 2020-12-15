@@ -1,3 +1,6 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/LeonardoCampello-dev/Launchstore?color=orange&style=for-the-badge)
+![License](https://img.shields.io/github/license/LeonardoCampello-dev/Launchstore?color=orange&style=for-the-badge)
+
 <h1 align="center">
     <img 
         src="./.github/placeholder.png" 
