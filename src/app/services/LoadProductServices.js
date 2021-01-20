@@ -1,71 +1,71 @@
-const { formatPrice, date } = require('../../lib/utils')
-const Product = require('../models/Product')
+const { formatPrice, date } = require("../../lib/utils");
+const Product = require("../models/Product");
 
 async function getImages(productId) {
-    let files = await Product.files(productId)
+  let files = await Product.files(productId);
 
-    files = files.map(file => ({
-        ...file,
-        src: `${file.path.replace('public', '')}`
-    }))
+  files = files.map((file) => ({
+    ...file,
+    src: `${file.path.replace("public", "")}`,
+  }));
 
-    return files
+  return files;
 }
 
 async function format(product) {
-    const files = await getImages(product.id)
+  const files = await getImages(product.id);
 
-    product.img = files[0].src
-    product.files = files
+  product.img = files[0].src;
+  product.files = files;
 
-    product.formattedOldPrice = formatPrice(product.old_price)
-    product.formattedPrice = formatPrice(product.price)
+  product.formattedOldPrice = formatPrice(product.old_price);
+  product.formattedPrice = formatPrice(product.price);
 
-    const { minutes, hours, day, month } = date(product.updated_at)
+  const { minutes, hours, day, month } = date(product.updated_at);
 
-    product.published = {
-        date: `${day}/${month}`,
-        time: `${hours}h${minutes}`
-    }
+  product.published = {
+    date: `${day}/${month}`,
+    time: `${hours}h${minutes}`,
+  };
 
-    return product
+  return product;
 }
 
 const LoadService = {
-    load(service, filter) {
-        this.filter = filter
-        return this[service]()
-    },
-    async product() {
-        try {
-            const product = await Product.findOne(this.filter)
+  load(service, filter) {
+    this.filter = filter;
+    return this[service]();
+  },
+  async product() {
+    try {
+      const product = await Product.findOne(this.filter);
 
-            return format(product)
-        } catch (error) {
-            console.error(error)
-        }
-    },
-    async products() {
-        try {
-            const products = await Product.findAll(this.filter)
+      return format(product);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async products() {
+    try {
+      const products = await Product.findAll(this.filter);
 
-            const productsPromises = await products.map(format) // product => format(product)
+      const productsPromises = await products.map(format); // product => format(product)
 
-            return Promise.all(productsPromises)
-        } catch (error) {
-            console.error(error)
-        }
-    },
-    async productWithDeleted() {
-        try {
-            let product = await Product.findOneWithDeleted(this.filter)
+      return Promise.all(productsPromises);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async productWithDeleted() {
+    try {
+      let product = await Product.findOneWithDeleted(this.filter);
 
-            return format(product)
-        } catch (error) {
-            console.error(error)
-        }
-    },
-    format
-}
+      return format(product);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  format,
+};
 
-module.exports = LoadService
+module.exports = LoadService;

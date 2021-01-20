@@ -1,94 +1,91 @@
 /* USER REGISTER */
 
 .user-register {
-    max-width: 500px;
+  max-width: 500px;
 }
 
 .user-dashboard {
-    max-width: 600px;
+  max-width: 600px;
 }
 
 /* USER ADS */
 
 .user-ads {
-    max-width: 700px;
+  max-width: 700px;
 }
 
 .user-ads .items {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 32px;
 
-    padding: 16px 0;
+  padding: 16px 0;
 }
 
 .user-ads .item {
-    display: grid;
-    grid-template-columns: 116px auto;
+  display: grid;
+  grid-template-columns: 116px auto;
 
-    align-items: start;
+  align-items: start;
 
-    color: var(--text-base);
+  color: var(--text-base);
 }
 
 .user-ads .item .image {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-    border-radius: 8px;
-    border: 1px solid #eee;
-    box-shadow: 2px 2px 4px -4px #000;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 2px 2px 4px -4px #000;
 }
 
 .user-ads .item .info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    height: 100px;
+  height: 100px;
 }
 
 .user-ads .info .title {
-    font-size: 18px;
-    font-weight: normal;
+  font-size: 18px;
+  font-weight: normal;
 
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .user-ads .info .price {
-    color: #555;
+  color: #555;
 
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
 
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .user-ads .info .published {
-    font-size: 14px;
-    font-weight: lighter;
+  font-size: 14px;
+  font-weight: lighter;
 }
 
 .user-ads .item .info .actions {
-    display: flex;
+  display: flex;
 
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .user-ads .item .info .actions a {
-    margin-right: 16px;
+  margin-right: 16px;
 
-    color: var(--text-base);
+  color: var(--text-base);
 
-    transition: .2s;
+  transition: 0.2s;
 }
 
 .user-ads .item .info .actions a:hover {
-    font-weight: bold;
+  font-weight: bold;
 }
-
-
-

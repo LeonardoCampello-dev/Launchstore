@@ -1,7 +1,7 @@
-const Base = require('./Base')
+const Base = require("./Base");
 
-Base.init({ table: 'orders' })
+Base.init({ table: "orders" });
 
 module.exports = {
-    ...Base
-}
+  ...Base,
+};

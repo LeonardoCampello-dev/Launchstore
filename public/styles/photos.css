@@ -1,96 +1,96 @@
 /* PHOTOS UPLOAD */
 
 form .item #photos-upload {
-    width: 200px;
+  width: 200px;
 
-    display: block;
-    overflow: hidden;
-    
-    position: relative;
+  display: block;
+  overflow: hidden;
+
+  position: relative;
 }
 
 form .item #photos-upload p {
-    width: 100%;
-    padding: 8px 16px;
+  width: 100%;
+  padding: 8px 16px;
 
-    color: #fff;
-    background-color: var(--secondary-color);
-    box-shadow: 0 2px 2px -6 var(--text-base);
-    border-radius: 4px;
+  color: #fff;
+  background-color: var(--secondary-color);
+  box-shadow: 0 2px 2px -6 var(--text-base);
+  border-radius: 4px;
 
-    font-size: 12px;
-    text-align: center;
-    text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 form .item #photos-upload p i {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 form .item #photos-input {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    
-    opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 
-    overflow: hidden;
-    position: absolute;
-    
-    cursor: pointer;
+  opacity: 0;
+
+  overflow: hidden;
+  position: absolute;
+
+  cursor: pointer;
 }
 
 form .item #photos-preview {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 8px;
 
-    width: 100%;
-    margin: 8px 0;
+  width: 100%;
+  margin: 8px 0;
 }
 
 form .item #photos-preview img {
-    width: 100%;
-    height: 150px;
+  width: 100%;
+  height: 150px;
 
-    border-radius: 4px;
-    
-    object-fit: cover;
+  border-radius: 4px;
 
-    box-shadow: 2px 2px 2px -6 rgba(60, 60, 60, .9);
+  object-fit: cover;
+
+  box-shadow: 2px 2px 2px -6 rgba(60, 60, 60, 0.9);
 }
 
 #photos-preview .photo {
-    position: relative;
+  position: relative;
 }
 
 #photos-preview .photo i {
-    position: absolute;
+  position: absolute;
 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    background: rgba(255, 255, 255, .4);
-    color: #DD2F45;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-    font-size: 500%;
-    cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  color: #dd2f45;
 
-    transition: opacity 200ms;
-    opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 500%;
+  cursor: pointer;
+
+  transition: opacity 200ms;
+  opacity: 0;
 }
 
 #photos-preview .photo:hover i {
-    opacity: 1;
+  opacity: 1;
 }

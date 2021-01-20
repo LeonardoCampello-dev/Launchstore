@@ -1,20 +1,21 @@
-const LoadProductServices = require('../services/LoadProductServices')
+const LoadProductServices = require("../services/LoadProductServices");
 
 module.exports = {
-    async index(req, res) {
-        try {
-            const allProducts = await LoadProductServices.load('products')
+  async index(req, res) {
+    try {
+      const allProducts = await LoadProductServices.load("products");
 
-            const products = allProducts
-                .filter((product, index) => index > 5 ? false : true)
+      const products = allProducts.filter((product, index) =>
+        index > 5 ? false : true
+      );
 
-            return res.render('home/index.njk', { products })
-        } catch (error) {
-            console.error(error)
-            return res.render('home/index.njk', {
-                products,
-                error: 'Erro ao carregar a página!'
-            })
-        }
+      return res.render("home/index.njk", { products });
+    } catch (error) {
+      console.error(error);
+      return res.render("home/index.njk", {
+        products,
+        error: "Erro ao carregar a página!",
+      });
     }
-}
+  },
+};

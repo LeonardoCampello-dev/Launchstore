@@ -1,33 +1,33 @@
 @keyframes hidemessage {
-    to {
-        top: -50px;
-        opacity: 0;
-    }
+  to {
+    top: -50px;
+    opacity: 0;
+  }
 }
 
 .messages {
-    color: #fff;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  color: #fff;
 
-    width: 100%;
-    padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    position: fixed;
-    top: 0;
+  width: 100%;
+  padding: 24px;
 
-    opacity: 1;
-    animation: hidemessage .4s 4s ease-out forwards;
+  position: fixed;
+  top: 0;
 
-    z-index: 9999;
+  opacity: 1;
+  animation: hidemessage 0.4s 4s ease-out forwards;
+
+  z-index: 9999;
 }
 
 .messages.error {
-    background-color: var(--error-color);
+  background-color: var(--error-color);
 }
 
 .messages.success {
-    background-color: var(--success-color);
+  background-color: var(--success-color);
 }

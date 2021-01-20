@@ -1,51 +1,51 @@
 /* SEARCH PAGE */
 
 .search-products {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 16px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
 
-    margin-top: 48px;
+  margin-top: 48px;
 }
 
 .search-products .header {
-    color: var(--text-base);
-    font-size: 14px;
+  color: var(--text-base);
+  font-size: 14px;
 
-    margin-bottom: 48px;
+  margin-bottom: 48px;
 }
 
 .search-products .header h2 {
-    font-size: 32px;
-    text-transform: uppercase;
+  font-size: 32px;
+  text-transform: uppercase;
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .search-products nav h4 {
-    color: var(--text-base);
-    font-size: 14px;
-    text-transform: uppercase;
+  color: var(--text-base);
+  font-size: 14px;
+  text-transform: uppercase;
 
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .search-products nav ul li {
-    background-color: var(--primary-color);
-    border-radius: 16px;
-    padding: 8px;
+  background-color: var(--primary-color);
+  border-radius: 16px;
+  padding: 8px;
 
-    display: inline-block;
-    
-    margin: 4px 0;
+  display: inline-block;
 
-    transition: .2s;
+  margin: 4px 0;
+
+  transition: 0.2s;
 }
-    
+
 .search-products nav ul li a {
-    color: #fff;
+  color: #fff;
 }
 
 .search-products nav ul li:hover {
-    background-color: #4c0994;
+  background-color: #4c0994;
 }
